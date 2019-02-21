@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AutoSure</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="sure">Sure</string>
+    <string name="app_car_image">App Car Image</string>
+    <string name="auto">Auto</string>
+    <string name="username">username</string>
 </resources>
