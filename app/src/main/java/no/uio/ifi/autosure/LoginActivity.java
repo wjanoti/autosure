@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -34,9 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         checkLogin();
     }
 
-    public void login(View view) {
+    public void login(final View view) {
         String userName = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
+        final Button loginButton = (Button) view;
 
         if (userName.isEmpty()) {
             editTextUsername.setError("Username is required!");
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         progressBarLogin.setVisibility(View.VISIBLE);
+        loginButton.setEnabled(false);
         TaskListener loginCallback = new TaskListener() {
             @Override
             public void onFinished(Integer sessionId) {
@@ -59,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                 }
+                loginButton.setEnabled(true);
             }
         };
 
