@@ -16,7 +16,7 @@
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_24dp" />
+        app:srcCompat="@drawable/ic_add" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recViewClaimsHistory"

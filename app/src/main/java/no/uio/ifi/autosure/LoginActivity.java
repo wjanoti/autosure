@@ -35,6 +35,16 @@ public class LoginActivity extends AppCompatActivity {
         String userName = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
 
+        if (userName.isEmpty()) {
+            editTextUsername.setError("Username is required!");
+            return;
+        }
+
+        if (password.isEmpty()) {
+            editTextPassword.setError("Password is required!");
+            return;
+        }
+
         TaskListener loginCallback = new TaskListener() {
             @Override
             public void onFinished(Integer sessionId) {
