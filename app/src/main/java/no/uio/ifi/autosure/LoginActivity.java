@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -12,6 +13,7 @@ public class LoginActivity extends AppCompatActivity {
     SessionManager sessionManager;
     EditText editTextUsername;
     EditText editTextPassword;
+    ProgressBar progressBarLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         editTextUsername = findViewById(R.id.editTextUserName);
         editTextPassword = findViewById(R.id.editTextPassword);
+        progressBarLogin = findViewById(R.id.progressBarLogin);
 
         checkLogin();
     }
@@ -45,9 +48,11 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        progressBarLogin.setVisibility(View.VISIBLE);
         TaskListener loginCallback = new TaskListener() {
             @Override
             public void onFinished(Integer sessionId) {
+                progressBarLogin.setVisibility(View.INVISIBLE);
                 if (sessionId != 0) {
                     sessionManager.setSessionId(sessionId);
                     navigateToClaimsHistory();
