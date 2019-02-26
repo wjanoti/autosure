@@ -41,6 +41,7 @@ class WSHelper {
 
         // obtain the result
         SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+
         return resultsRequestSOAP.toString();
     }
 
@@ -48,6 +49,14 @@ class WSHelper {
         final String METHOD_NAME = "login";
 
         return Integer.parseInt(makeRequest(METHOD_NAME, username, password));
+    }
+
+    static boolean logout(int sessionId) throws Exception {
+        final String METHOD_NAME = "logout";
+
+        String response = makeRequest(METHOD_NAME, Integer.toString(sessionId));
+
+        return response.equals("true");
     }
 
 }

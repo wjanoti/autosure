@@ -52,7 +52,8 @@ public class LoginActivity extends AppCompatActivity {
 
         progressBarLogin.setVisibility(View.VISIBLE);
         loginButton.setEnabled(false);
-        TaskListener loginCallback = new TaskListener() {
+
+        TaskListener loginCallback = new TaskListener<Integer>() {
             @Override
             public void onFinished(Integer sessionId) {
                 progressBarLogin.setVisibility(View.INVISIBLE);
@@ -69,6 +70,9 @@ public class LoginActivity extends AppCompatActivity {
         new LoginTask(loginCallback, userName, password).execute();
     }
 
+    /**
+     * Checks if there's an active session and navigates to claims history activity.
+     */
     private void checkLogin() {
         if (sessionManager.isLoggedIn()) {
             navigateToClaimsHistory();
@@ -76,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateToClaimsHistory() {
-        Intent intent = new Intent(LoginActivity.this, ClaimsHistoryActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }
 

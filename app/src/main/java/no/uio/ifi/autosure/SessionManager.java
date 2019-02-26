@@ -38,4 +38,11 @@ public class SessionManager {
     public boolean isLoggedIn() {
         return getSessionId() != -1;
     }
+
+    /**
+     * Clear sessions from storage.
+     */
+    public void clearSession() {
+        sharedPreferences.edit().clear().apply();
+    }
 }

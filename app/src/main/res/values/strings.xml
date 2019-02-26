@@ -6,4 +6,11 @@
     <string name="app_car_image">App Car Image</string>
     <string name="auto">Auto</string>
     <string name="username">username</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="profile">Profile</string>
+    <string name="claim_history">Claim History</string>
+    <string name="new_claim">New Claim</string>
+    <string name="logout">Logout</string>
 </resources>

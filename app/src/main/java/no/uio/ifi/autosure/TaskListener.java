@@ -1,7 +1,10 @@
 package no.uio.ifi.autosure;
 
-public interface TaskListener {
+public interface TaskListener<T> {
 
-    void onFinished(Integer sessionId);
+    /**
+     * Callback passed to tasks to return values to the calling activity.
+     */
+    void onFinished(T value);
 
 }
