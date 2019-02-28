@@ -1,7 +1,9 @@
-package no.uio.ifi.autosure;
+package no.uio.ifi.autosure.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
+import no.uio.ifi.autosure.WSHelper;
 
 public class LoginTask extends AsyncTask<Void, Void, Integer> {
 
@@ -10,7 +12,7 @@ public class LoginTask extends AsyncTask<Void, Void, Integer> {
     private String password;
     private TaskListener taskListener;
 
-    LoginTask(TaskListener taskListener, String userName, String password) {
+    public LoginTask(TaskListener taskListener, String userName, String password) {
         this.taskListener = taskListener;
         this.username = userName;
         this.password = password;

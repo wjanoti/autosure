@@ -1,4 +1,4 @@
-package no.uio.ifi.autosure;
+package no.uio.ifi.autosure.tasks;
 
 /**
  * Generic listener for AsyncTask callbacks.

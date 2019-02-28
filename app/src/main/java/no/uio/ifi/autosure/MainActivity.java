@@ -12,11 +12,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+
+import no.uio.ifi.autosure.tasks.LogoutTask;
+import no.uio.ifi.autosure.tasks.TaskListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
 
-    private SessionManager sessionManager;
+    private static SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity
         sessionManager = new SessionManager(this);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -58,6 +64,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.nav_profile:
+                loadFragment(ProfileFragment.class);
                 break;
             case R.id.nav_history:
                 loadFragment(ClaimsHistoryFragment.class);
@@ -87,6 +94,7 @@ public class MainActivity extends AppCompatActivity
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     sessionManager.clearSession();
                     startActivity(intent);
+                    finish();
                 }
             }
         };

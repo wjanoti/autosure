@@ -1,7 +1,9 @@
-package no.uio.ifi.autosure;
+package no.uio.ifi.autosure.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
+import no.uio.ifi.autosure.WSHelper;
 
 public class LogoutTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -10,7 +12,7 @@ public class LogoutTask extends AsyncTask<Void, Void, Boolean> {
     private boolean logoutSuccessful;
     private TaskListener taskListener;
 
-    LogoutTask(TaskListener taskListener, int sessionId) {
+    public LogoutTask(TaskListener taskListener, int sessionId) {
         this.taskListener = taskListener;
         this.sessionId = sessionId;
     }

@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import no.uio.ifi.autosure.tasks.LoginTask;
+import no.uio.ifi.autosure.tasks.TaskListener;
+
 public class LoginActivity extends AppCompatActivity {
 
     SessionManager sessionManager;
@@ -66,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
                 loginButton.setEnabled(true);
             }
         };
-
         new LoginTask(loginCallback, userName, password).execute();
     }
 
@@ -82,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     private void navigateToClaimsHistory() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
-
 }
 

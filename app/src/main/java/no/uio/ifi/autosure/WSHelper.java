@@ -6,7 +6,7 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-class WSHelper {
+public class WSHelper {
 
     private static final String TAG = "WSHelper";
     private static final String NAMESPACE = "http://pt.ulisboa.tecnico.sise.autoinsure.ws/";
@@ -45,13 +45,13 @@ class WSHelper {
         return resultsRequestSOAP.toString();
     }
 
-    static int login(String username, String password) throws Exception {
+    public static int login(String username, String password) throws Exception {
         final String METHOD_NAME = "login";
 
         return Integer.parseInt(makeRequest(METHOD_NAME, username, password));
     }
 
-    static boolean logout(int sessionId) throws Exception {
+    public static boolean logout(int sessionId) throws Exception {
         final String METHOD_NAME = "logout";
 
         String response = makeRequest(METHOD_NAME, Integer.toString(sessionId));
