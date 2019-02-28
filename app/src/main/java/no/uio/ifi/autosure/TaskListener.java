@@ -1,5 +1,10 @@
 package no.uio.ifi.autosure;
 
+/**
+ * Generic listener for AsyncTask callbacks.
+ *
+ * @param <T>
+ */
 public interface TaskListener<T> {
 
     /**

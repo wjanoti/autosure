@@ -2,8 +2,11 @@ package no.uio.ifi.autosure;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,7 +17,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener {
 
     private SessionManager sessionManager;
 
@@ -49,12 +52,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Fragment fragment = null;
+        Class fragmentClass = null;
+
         // keeps selected option highlighted
         item.setChecked(true);
         switch (item.getItemId()) {
             case R.id.nav_profile:
                 break;
             case R.id.nav_history:
+                fragmentClass = ClaimsHistoryFragment.class;
                 break;
             case R.id.nav_new_claim:
                 break;
@@ -62,7 +69,6 @@ public class MainActivity extends AppCompatActivity
                 TaskListener logoutCallback = new TaskListener<Boolean>() {
                     @Override
                     public void onFinished(Boolean logoutSuccessful) {
-                        Log.d("BACON", logoutSuccessful.toString());
                         if (logoutSuccessful) {
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             sessionManager.clearSession();
@@ -73,9 +79,25 @@ public class MainActivity extends AppCompatActivity
                 new LogoutTask(logoutCallback, sessionManager.getSessionId()).execute();
         }
 
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        setTitle(item.getTitle());
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
