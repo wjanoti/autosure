@@ -13,4 +13,9 @@
     <string name="claim_history">Claim History</string>
     <string name="new_claim">New Claim</string>
     <string name="logout">Logout</string>
+    <string name="name">Name</string>
+    <string name="fiscal_number">Fiscal Number</string>
+    <string name="address">Address</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="insurance_policy_number">Insurance Policy Number</string>
 </resources>

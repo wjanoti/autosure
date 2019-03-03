@@ -1,152 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtCustomerName"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="8dp"
-        android:text="User Name"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036" />
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:gravity="top">
 
-    <ImageView
-        android:id="@+id/imageViewProfile"
-        android:layout_width="83dp"
-        android:layout_height="85dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/txtCustomerName"
-        app:layout_constraintHorizontal_bias="0.094"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_account" />
-
-    <TextView
-        android:id="@+id/txtFiscalNumberLabel"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="101dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:src="@drawable/ic_account"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        android:text="Fiscal Number"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtFiscalNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile"
-        app:layout_constraintVertical_bias="0.941" />
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtCustomerNameLabel"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="#a2a1b8"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="left"
+                tools:ignore="RtlHardcoded" />
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtCustomerName"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#181737"
+                android:textColor="#181737"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="right"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dad8d8"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtFiscalNumberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fiscal_number"
+                android:textColor="#a2a1b8"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="left"
+                tools:ignore="RtlHardcoded" />
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtFiscalNumber"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="#1b193b"
+                android:textColor="#181737"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="right"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dad8d8"/>
 
-    <TextView
-        android:id="@+id/txtAddressLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="28dp"
-        android:text="Address"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/txtDateOfBirthLabel"
-        android:layout_width="168dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        android:text="Date of birth"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtDateOfBirth"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/txtInsuranceNumberLabel"
-        android:layout_width="244dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        android:text="Insurance Policy Number"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtInsurancePolicyNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.152"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/txtFiscalNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="20dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtAddressLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/txtAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginBottom="20dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDateOfBirthLabel"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/txtDateOfBirth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="20dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtInsuranceNumberLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/txtInsurancePolicyNumber"
-        android:layout_width="94dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.004"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtAddressLabel"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:textColor="#a2a1b8"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="left"
+                tools:ignore="RtlHardcoded" />
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtAddress"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="#1b193b"
+                android:textColor="#181737"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="right"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dad8d8"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtDateOfBirthLabel"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date_of_birth"
+                android:textColor="#a2a1b8"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="left"
+                tools:ignore="RtlHardcoded" />
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtDateOfBirth"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="#1b193b"
+                android:textColor="#181737"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="right"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dad8d8" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtInsurancePolicyNumberLabel"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/insurance_policy_number"
+                android:textColor="#a2a1b8"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="left"
+                tools:ignore="RtlHardcoded" />
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtInsurancePolicyNumber"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#1b193b"
+                android:textColor="#181737"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="right"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
