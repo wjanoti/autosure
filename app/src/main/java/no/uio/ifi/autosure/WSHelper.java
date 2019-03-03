@@ -1,10 +1,16 @@
 package no.uio.ifi.autosure;
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+
+import no.uio.ifi.autosure.models.Customer;
 
 public class WSHelper {
 
@@ -59,4 +65,24 @@ public class WSHelper {
         return response.equals("true");
     }
 
+    public static Customer getCustomerInfo(int sessionId) throws Exception {
+        final String METHOD_NAME = "getCustomerInfo";
+        String jsonResult = makeRequest(METHOD_NAME, Integer.toString(sessionId));
+        try {
+            JSONObject jsonRootObject = new JSONObject(jsonResult);
+            String customerName = jsonRootObject.getString("name");
+            if (customerName == null || customerName.equals("")) return null;
+            String userName = jsonRootObject.getString("username");
+            String address      = jsonRootObject.optString("address");
+            String dateOfBirth  = jsonRootObject.getString("dateOfBirth");
+            int fiscalNumber    = Integer.parseInt(jsonRootObject.getString("fiscalNumber"));
+            int policyNumber    = Integer.parseInt(jsonRootObject.optString("policyNumber"));
+
+            return new Customer(userName, customerName, address, dateOfBirth, fiscalNumber, policyNumber);
+        }  catch (JSONException e) {
+            e.printStackTrace();
+            Log.d(TAG, "getCustomerInfo - JSONResult:" + jsonResult);
+        }
+        return null;
+    }
 }

@@ -13,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import no.uio.ifi.autosure.models.Customer;
+import no.uio.ifi.autosure.tasks.CustomerInfoTask;
 import no.uio.ifi.autosure.tasks.LogoutTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
 
@@ -42,8 +45,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // default fragment
-        loadFragment(ClaimsHistoryFragment.class);
+        // load default fragment
+        loadFragment(ClaimsHistoryFragment.newInstance());
         navigationView.getMenu().getItem(1).setChecked(true);
     }
 
@@ -59,20 +62,25 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // keeps selected option highlighted on the drawer menu
         item.setChecked(true);
 
-        switch (item.getItemId()) {
-            case R.id.nav_profile:
-                loadFragment(ProfileFragment.class);
-                break;
-            case R.id.nav_history:
-                loadFragment(ClaimsHistoryFragment.class);
-                break;
-            case R.id.nav_new_claim:
-                break;
-            case R.id.nav_logout:
-                logout();
+        try {
+            switch (item.getItemId()) {
+                case R.id.nav_profile:
+                    fetchCustomerInfo(sessionManager.getSessionId());
+                    break;
+                case R.id.nav_history:
+                    loadFragment(ClaimsHistoryFragment.newInstance());
+                    break;
+                case R.id.nav_new_claim:
+                    break;
+                case R.id.nav_logout:
+                    logout();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -86,6 +94,20 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public void fetchCustomerInfo(int sessionId) {
+        TaskListener fetchCustomerInfoCallback = new TaskListener<Customer>() {
+            @Override
+            public void onFinished(Customer customerResult) {
+                Fragment profileFragment = ProfileFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("customer", customerResult);
+                profileFragment.setArguments(bundle);
+                loadFragment(profileFragment);
+            }
+        };
+        new CustomerInfoTask(fetchCustomerInfoCallback, sessionId).execute();
+    }
+
     private void logout() {
         TaskListener logoutCallback = new TaskListener<Boolean>() {
             @Override
@@ -95,27 +117,19 @@ public class MainActivity extends AppCompatActivity
                     sessionManager.clearSession();
                     startActivity(intent);
                     finish();
+                } else {
+                    Toast.makeText(MainActivity.this, "Logout failed", Toast.LENGTH_SHORT).show();
                 }
             }
         };
         new LogoutTask(logoutCallback, sessionManager.getSessionId()).execute();
     }
 
-    /**
-     * Loads a fragment into the main activity.
-     *
-     * @param fragmentClass name of the fragment's class
-     */
-    private void loadFragment(Class fragmentClass) {
-        Fragment fragment = null;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
+    private void loadFragment(Fragment fragment) {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.clContent, fragment).commit();
     }
+
 }
