@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import no.uio.ifi.autosure.models.Customer;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
 
     private static SessionManager sessionManager;
+    private Customer customer;
+    private TextView navUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +48,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        navUserName = navigationView.getHeaderView(0).findViewById(R.id.nav_user_name);
+
         // load default fragment
         loadFragment(ClaimsHistoryFragment.newInstance());
         navigationView.getMenu().getItem(1).setChecked(true);
+
+        fetchCustomerInfo(sessionManager.getSessionId());
+
     }
 
     @Override
@@ -69,7 +77,11 @@ public class MainActivity extends AppCompatActivity
         try {
             switch (item.getItemId()) {
                 case R.id.nav_profile:
-                    fetchCustomerInfo(sessionManager.getSessionId());
+                    Fragment profileFragment = ProfileFragment.newInstance();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("customer", this.customer);
+                    profileFragment.setArguments(bundle);
+                    loadFragment(profileFragment);
                     break;
                 case R.id.nav_history:
                     loadFragment(ClaimsHistoryFragment.newInstance());
@@ -98,11 +110,8 @@ public class MainActivity extends AppCompatActivity
         TaskListener fetchCustomerInfoCallback = new TaskListener<Customer>() {
             @Override
             public void onFinished(Customer customerResult) {
-                Fragment profileFragment = ProfileFragment.newInstance();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("customer", customerResult);
-                profileFragment.setArguments(bundle);
-                loadFragment(profileFragment);
+                customer = customerResult;
+                navUserName.setText(customerResult.getName());
             }
         };
         new CustomerInfoTask(fetchCustomerInfoCallback, sessionId).execute();
