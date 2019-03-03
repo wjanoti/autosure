@@ -1,6 +1,6 @@
 # autosure
 
-Projesktoppgave for https://www.uio.no/studier/emner/matnat/ifi/IN5600/ 
+Prosjektoppgaven for https://www.uio.no/studier/emner/matnat/ifi/IN5600/ 
  
 
 
