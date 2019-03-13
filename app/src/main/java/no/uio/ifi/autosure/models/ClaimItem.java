@@ -1,6 +1,6 @@
 package no.uio.ifi.autosure.models;
 
-public class ClaimItem {
+public class ClaimItem implements Comparable<ClaimItem> {
 
     private String title;
     private int id;
@@ -18,4 +18,8 @@ public class ClaimItem {
         return id;
     }
 
+    @Override
+    public int compareTo(ClaimItem o) {
+        return Integer.compare(this.getId(), o.getId());
+    }
 }

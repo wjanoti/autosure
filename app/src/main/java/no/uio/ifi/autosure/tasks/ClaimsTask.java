@@ -3,6 +3,7 @@ package no.uio.ifi.autosure.tasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.util.Collections;
 import java.util.List;
 
 import no.uio.ifi.autosure.WSHelper;
@@ -35,6 +36,7 @@ public class ClaimsTask extends AsyncTask<Void, Void, List<ClaimItem>> {
     protected void onPostExecute(List<ClaimItem> claimItems) {
         super.onPostExecute(claimItems);
         if(this.taskListener != null) {
+            Collections.sort(claimItems);
             this.taskListener.onFinished(claimItems);
         }
     }
