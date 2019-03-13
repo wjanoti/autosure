@@ -16,15 +16,12 @@ import android.widget.Toast;
 import java.util.List;
 
 import no.uio.ifi.autosure.models.ClaimItem;
-import no.uio.ifi.autosure.tasks.ClaimsTask;
+import no.uio.ifi.autosure.tasks.ClaimListTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
 
 public class ClaimsHistoryFragment extends Fragment {
 
-    private String TAG = "ClaimsHistoryFragment";
-
     private List<ClaimItem> claimItems;
-    private RecyclerView recyclerViewClaimHistory;
     private ProgressBar pbClaimsHistory;
     private ClaimItemAdapter claimItemAdapter;
     private OnFragmentInteractionListener mListener;
@@ -58,7 +55,7 @@ public class ClaimsHistoryFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         claimItemAdapter = new ClaimItemAdapter(claimItems);
 
-        recyclerViewClaimHistory = view.findViewById(R.id.recViewClaimsHistory);
+        RecyclerView recyclerViewClaimHistory = view.findViewById(R.id.recViewClaimsHistory);
         recyclerViewClaimHistory.setLayoutManager(mLayoutManager);
         recyclerViewClaimHistory.setHasFixedSize(true);
         recyclerViewClaimHistory.setAdapter(claimItemAdapter);
@@ -110,7 +107,7 @@ public class ClaimsHistoryFragment extends Fragment {
                 ClaimsHistoryFragment.this.claimItemAdapter.notifyDataSetChanged();
             }
         };
-        new ClaimsTask(fetchCustomerClaimsCallback, sessionId).execute();
+        new ClaimListTask(fetchCustomerClaimsCallback, sessionId).execute();
     }
 
     public interface OnFragmentInteractionListener {

@@ -9,14 +9,14 @@ import java.util.List;
 import no.uio.ifi.autosure.WSHelper;
 import no.uio.ifi.autosure.models.ClaimItem;
 
-public class ClaimsTask extends AsyncTask<Void, Void, List<ClaimItem>> {
+public class ClaimListTask extends AsyncTask<Void, Void, List<ClaimItem>> {
 
-    private final static String TAG = "ClaimsTask";
+    private final static String TAG = "ClaimListTask";
     private int sessionId;
     private List<ClaimItem> claimItems;
     private TaskListener taskListener;
 
-    public ClaimsTask(TaskListener taskListener, int sessionId) {
+    public ClaimListTask(TaskListener taskListener, int sessionId) {
         this.taskListener = taskListener;
         this.sessionId = sessionId;
     }
