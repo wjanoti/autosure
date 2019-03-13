@@ -1,6 +1,7 @@
 package no.uio.ifi.autosure;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,34 +15,29 @@ import no.uio.ifi.autosure.models.ClaimItem;
 public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.ViewHolder> {
 
     private List<ClaimItem> claimItemsList;
-    private Context context;
 
-
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    // Reference to the view of each data item in the recycler view.
+    static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView txtClaimItemTitle;
-        public TextView txtClaimItemId;
+        TextView txtClaimItemTitle;
+        TextView txtClaimItemId;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             txtClaimItemTitle = v.findViewById(R.id.txtClaimItemTitle);
             txtClaimItemId = v.findViewById(R.id.txtClaimItemId);
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public ClaimItemAdapter(List<ClaimItem> claimItemsList, Context context) {
+    ClaimItemAdapter(List<ClaimItem> claimItemsList) {
         this.claimItemsList = claimItemsList;
-        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
-    public ClaimItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                     int viewType) {
+    public ClaimItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                          int viewType) {
         View claimItemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.claim_item_view, parent, false);
 
@@ -49,11 +45,12 @@ public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.View
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final ClaimItem claimItem = claimItemsList.get(position);
         holder.txtClaimItemTitle.setText(claimItem.getTitle());
-        holder.txtClaimItemId.setText(claimItem.getId());
+        holder.txtClaimItemId.setText(Integer.toString(claimItem.getId()));
 
     }
 
@@ -66,7 +63,7 @@ public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.View
         return 0;
     }
 
-    public void setClaimItemsList(List<ClaimItem> claimItemsList) {
+    void setClaimItemsList(List<ClaimItem> claimItemsList) {
         this.claimItemsList = claimItemsList;
     }
 }

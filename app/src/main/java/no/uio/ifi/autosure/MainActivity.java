@@ -17,17 +17,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
-import no.uio.ifi.autosure.models.ClaimItem;
 import no.uio.ifi.autosure.models.Customer;
-import no.uio.ifi.autosure.tasks.ClaimsTask;
 import no.uio.ifi.autosure.tasks.CustomerInfoTask;
 import no.uio.ifi.autosure.tasks.LogoutTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener {
 
     private static SessionManager sessionManager;
     private Customer customer;
