@@ -22,8 +22,7 @@ import no.uio.ifi.autosure.models.Customer;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String CUSTOMER = "customer";
     private OnFragmentInteractionListener mListener;
     private Customer customer;

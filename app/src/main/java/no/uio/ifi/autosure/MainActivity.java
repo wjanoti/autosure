@@ -11,12 +11,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import no.uio.ifi.autosure.models.ClaimItem;
 import no.uio.ifi.autosure.models.Customer;
+import no.uio.ifi.autosure.tasks.ClaimsTask;
 import no.uio.ifi.autosure.tasks.CustomerInfoTask;
 import no.uio.ifi.autosure.tasks.LogoutTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity
         navUserName = navigationView.getHeaderView(0).findViewById(R.id.nav_user_name);
 
         // load default fragment
-        loadFragment(ClaimsHistoryFragment.newInstance());
+        loadFragment(ClaimsHistoryFragment.newInstance(sessionManager.getSessionId()));
         navigationView.getMenu().getItem(1).setChecked(true);
 
         fetchCustomerInfo(sessionManager.getSessionId());
@@ -71,6 +76,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
+        Bundle bundle = new Bundle();
+
         // keeps selected option highlighted on the drawer menu
         item.setChecked(true);
 
@@ -78,13 +85,13 @@ public class MainActivity extends AppCompatActivity
             switch (item.getItemId()) {
                 case R.id.nav_profile:
                     Fragment profileFragment = ProfileFragment.newInstance();
-                    Bundle bundle = new Bundle();
                     bundle.putSerializable("customer", this.customer);
                     profileFragment.setArguments(bundle);
                     loadFragment(profileFragment);
                     break;
                 case R.id.nav_history:
-                    loadFragment(ClaimsHistoryFragment.newInstance());
+                    Fragment claimHistoryFragment = ClaimsHistoryFragment.newInstance(sessionManager.getSessionId());
+                    loadFragment(claimHistoryFragment);
                     break;
                 case R.id.nav_new_claim:
                     break;
@@ -133,7 +140,6 @@ public class MainActivity extends AppCompatActivity
         };
         new LogoutTask(logoutCallback, sessionManager.getSessionId()).execute();
     }
-
 
     private void loadFragment(Fragment fragment) {
         // Insert the fragment by replacing any existing fragment

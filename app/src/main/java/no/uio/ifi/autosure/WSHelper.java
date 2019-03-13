@@ -2,6 +2,7 @@ package no.uio.ifi.autosure;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
@@ -10,6 +11,10 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import no.uio.ifi.autosure.models.ClaimItem;
 import no.uio.ifi.autosure.models.Customer;
 
 public class WSHelper {
@@ -82,6 +87,26 @@ public class WSHelper {
         }  catch (JSONException e) {
             e.printStackTrace();
             Log.d(TAG, "getCustomerInfo - JSONResult:" + jsonResult);
+        }
+        return null;
+    }
+
+    public static List<ClaimItem> getCustomerClaims(int sessionId) throws Exception {
+        final String METHOD_NAME = "listClaims";
+        String jsonResult = makeRequest(METHOD_NAME, Integer.toString(sessionId));
+        try {
+            JSONArray jsonArray = new JSONArray(jsonResult);
+            ArrayList<ClaimItem> claimList = new ArrayList<>();
+            for(int i=0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                int claimId = Integer.parseInt(jsonObject.optString("claimId"));
+                String claimTitle = jsonObject.optString("claimTitle");
+                claimList.add(new ClaimItem(claimId, claimTitle));
+            }
+            return claimList;
+        }  catch (JSONException e) {
+            e.printStackTrace();
+            Log.d(TAG, "listClaims - JSONResult:" + jsonResult);
         }
         return null;
     }
