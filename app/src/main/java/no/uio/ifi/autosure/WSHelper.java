@@ -103,6 +103,7 @@ public class WSHelper {
                 String claimTitle = jsonObject.optString("claimTitle");
                 claimList.add(new ClaimItem(claimId, claimTitle));
             }
+
             return claimList;
         }  catch (JSONException e) {
             e.printStackTrace();

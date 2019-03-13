@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.List;
@@ -30,8 +31,11 @@ import no.uio.ifi.autosure.tasks.TaskListener;
  */
 public class ClaimsHistoryFragment extends Fragment {
 
+    private String TAG = "ClaimsHistoryFragment";
+
     private List<ClaimItem> claimItems;
     private RecyclerView recyclerViewClaimHistory;
+    private ProgressBar pbClaimsHistory;
     private ClaimItemAdapter claimItemAdapter;
     private OnFragmentInteractionListener mListener;
 
@@ -68,12 +72,15 @@ public class ClaimsHistoryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated");
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+
         recyclerViewClaimHistory = this.getActivity().findViewById(R.id.recViewClaimsHistory);
         recyclerViewClaimHistory.setLayoutManager(mLayoutManager);
         recyclerViewClaimHistory.setHasFixedSize(true);
         claimItemAdapter = new ClaimItemAdapter(claimItems, getContext());
         recyclerViewClaimHistory.setAdapter(claimItemAdapter);
+        pbClaimsHistory = this.getActivity().findViewById(R.id.pbClaimsHistory);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -109,6 +116,7 @@ public class ClaimsHistoryFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Error fetching claims", Toast.LENGTH_SHORT).show();
                 }
+                ClaimsHistoryFragment.this.pbClaimsHistory.setVisibility(View.INVISIBLE);
             }
         };
         new ClaimsTask(fetchCustomerClaimsCallback, sessionId).execute();
