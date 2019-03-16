@@ -104,6 +104,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public SessionManager getSessionManager() {
+        return sessionManager;
+    }
+
     @Override
     public void onFragmentInteraction(Uri uri) {
 

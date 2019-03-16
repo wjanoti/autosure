@@ -14,6 +14,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.uio.ifi.autosure.models.Claim;
 import no.uio.ifi.autosure.models.ClaimItem;
 import no.uio.ifi.autosure.models.Customer;
 
@@ -108,6 +109,26 @@ public class WSHelper {
         }  catch (JSONException e) {
             e.printStackTrace();
             Log.d(TAG, "listClaims - JSONResult:" + jsonResult);
+        }
+        return null;
+    }
+
+    public static Claim getClaimInfo(int sessionId, int claimId) throws Exception {
+        final String METHOD_NAME = "getClaimInfo";
+        String jsonResult = makeRequest(METHOD_NAME, Integer.toString(sessionId), Integer.toString(claimId));
+        try {
+            JSONObject jsonRootObject = new JSONObject(jsonResult);
+            int claimIdResp         = Integer.parseInt(jsonRootObject.getString("claimId"));
+            String claimTitle       = jsonRootObject.getString("claimTitle");
+            String plate            = jsonRootObject.optString("plate");
+            String submissionDate   = jsonRootObject.optString("submissionDate");
+            String occurrenceDate   = jsonRootObject.optString("occurrenceDate");
+            String description      = jsonRootObject.optString("description");
+            String status           = jsonRootObject.optString("status");
+            return new Claim(claimIdResp, claimTitle, submissionDate, occurrenceDate, plate, description, status);
+        }  catch (JSONException e) {
+            e.printStackTrace();
+            Log.d(TAG, "getClaimInfo - JSONResult:" + jsonResult);
         }
         return null;
     }

@@ -9,6 +9,9 @@ import java.util.List;
 import no.uio.ifi.autosure.WSHelper;
 import no.uio.ifi.autosure.models.ClaimItem;
 
+/**
+ * Fetches basic info about all of the claims a customer have.
+ */
 public class ClaimListTask extends AsyncTask<Void, Void, List<ClaimItem>> {
 
     private final static String TAG = "ClaimListTask";

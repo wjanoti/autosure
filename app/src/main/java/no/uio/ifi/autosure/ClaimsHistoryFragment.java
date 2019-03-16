@@ -102,9 +102,9 @@ public class ClaimsHistoryFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Error fetching claims", Toast.LENGTH_SHORT).show();
                 }
-                ClaimsHistoryFragment.this.pbClaimsHistory.setVisibility(View.INVISIBLE);
-                ClaimsHistoryFragment.this.claimItemAdapter.setClaimItemsList(claimItems);
-                ClaimsHistoryFragment.this.claimItemAdapter.notifyDataSetChanged();
+                pbClaimsHistory.setVisibility(View.INVISIBLE);
+                claimItemAdapter.setClaimItemsList(claimItems);
+                claimItemAdapter.notifyDataSetChanged();
             }
         };
         new ClaimListTask(fetchCustomerClaimsCallback, sessionId).execute();
