@@ -1,6 +1,7 @@
 package no.uio.ifi.autosure;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ public class ProfileFragment extends Fragment {
 
     private static final String CUSTOMER = "customer";
     private Customer customer;
+    private OnFragmentInteractionListener mListener;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -52,6 +54,22 @@ public class ProfileFragment extends Fragment {
         txtdateOfBirth.setText(customer.getDateOfBirth());
         txtinsurancePolicyNumber.setText(Integer.toString(customer.getPolicyNumber()));
         txtfiscalNumberTxt.setText(Integer.toString(customer.getFiscalNumber()));
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+            mListener.onFragmentInteraction("Profile");
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(String title);
     }
 
 }

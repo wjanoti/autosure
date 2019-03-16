@@ -23,7 +23,7 @@ import no.uio.ifi.autosure.tasks.LogoutTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
 
     private static SessionManager sessionManager;
     private Customer customer;
@@ -109,7 +109,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(String title) {
+        setTitle(title);
     }
 
     public void fetchCustomerInfo(int sessionId) {
