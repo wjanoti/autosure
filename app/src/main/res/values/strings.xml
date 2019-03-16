@@ -18,4 +18,16 @@
     <string name="address">Address</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="insurance_policy_number">Insurance Policy Number</string>
+    <string name="title">Title</string>
+    <string name="claim_id">Claim ID</string>
+    <string name="issuing_date">Issuing date</string>
+    <string name="plate">Plate</string>
+    <string name="claim_messages">Messages</string>
+    <string name="claim_info">Claim Info</string>
+    <string name="claim_issuing_date">Issuing Date</string>
+    <string name="claim_id_label">Claim ID</string>
+    <string name="claim_plate">Plate</string>
+    <string name="claim_status">Status</string>
+    <string name="claim_description">Description</string>
+    <string name="claim_title">Title</string>
 </resources>

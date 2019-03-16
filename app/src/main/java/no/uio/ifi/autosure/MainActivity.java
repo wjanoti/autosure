@@ -120,6 +120,12 @@ public class MainActivity extends AppCompatActivity
         new CustomerInfoTask(fetchCustomerInfoCallback, sessionId).execute();
     }
 
+    public void loadFragment(Fragment fragment) {
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.clContent, fragment).commit();
+    }
+
     private void logout() {
         TaskListener logoutCallback = new TaskListener<Boolean>() {
             @Override
@@ -135,12 +141,6 @@ public class MainActivity extends AppCompatActivity
             }
         };
         new LogoutTask(logoutCallback, sessionManager.getSessionId()).execute();
-    }
-
-    private void loadFragment(Fragment fragment) {
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.clContent, fragment).commit();
     }
 
 }

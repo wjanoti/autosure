@@ -2,11 +2,14 @@ package no.uio.ifi.autosure;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -26,6 +29,13 @@ public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.View
             super(v);
             txtClaimItemTitle = v.findViewById(R.id.txtClaimItemTitle);
             txtClaimItemId = v.findViewById(R.id.txtClaimItemId);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO: handle claim click
+                    ((MainActivity)v.getContext()).loadFragment(ClaimFragment.newInstance());
+                }
+            });
         }
     }
 
