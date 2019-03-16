@@ -6,7 +6,7 @@ import android.util.Log;
 import java.util.Collections;
 import java.util.List;
 
-import no.uio.ifi.autosure.WSHelper;
+import no.uio.ifi.autosure.helpers.WSHelper;
 import no.uio.ifi.autosure.models.ClaimItem;
 
 /**

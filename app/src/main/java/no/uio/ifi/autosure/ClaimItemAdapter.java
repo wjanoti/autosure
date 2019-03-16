@@ -29,8 +29,14 @@ public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.View
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // loads the claim details fragment
                     int sessionId = ((MainActivity)v.getContext()).getSessionManager().getSessionId();
-                    ((MainActivity)v.getContext()).loadFragment(ClaimDetailsFragment.newInstance(sessionId, Integer.parseInt(txtClaimItemId.getText().toString())));
+                    ((MainActivity)v.getContext()).loadFragment(
+                        ClaimDetailsFragment.newInstance(
+                                sessionId,
+                                Integer.parseInt(txtClaimItemId.getText().toString())
+                        )
+                    );
                 }
             });
         }
@@ -58,7 +64,6 @@ public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.View
         final ClaimItem claimItem = claimItemsList.get(position);
         holder.txtClaimItemTitle.setText(claimItem.getTitle());
         holder.txtClaimItemId.setText(Integer.toString(claimItem.getId()));
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)

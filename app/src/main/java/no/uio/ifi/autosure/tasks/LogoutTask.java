@@ -3,7 +3,7 @@ package no.uio.ifi.autosure.tasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import no.uio.ifi.autosure.WSHelper;
+import no.uio.ifi.autosure.helpers.WSHelper;
 
 public class LogoutTask extends AsyncTask<Void, Void, Boolean> {
 

@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-
     }
 
     public void fetchCustomerInfo(int sessionId) {

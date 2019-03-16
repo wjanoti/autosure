@@ -3,7 +3,7 @@ package no.uio.ifi.autosure.tasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import no.uio.ifi.autosure.WSHelper;
+import no.uio.ifi.autosure.helpers.WSHelper;
 import no.uio.ifi.autosure.models.Customer;
 
 public class CustomerInfoTask extends AsyncTask<Void, Void, Customer> {

@@ -52,6 +52,7 @@ public class ClaimsHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_claims_history, container, false);
+
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         claimItemAdapter = new ClaimItemAdapter(claimItems);
 
