@@ -1,17 +1,15 @@
 package no.uio.ifi.autosure;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import no.uio.ifi.autosure.models.Claim;
@@ -20,15 +18,9 @@ import no.uio.ifi.autosure.tasks.TaskListener;
 
 public class ClaimDetailsFragment extends Fragment {
 
-    private TextView txtClaimTitle;
-    private TextView txtClaimId;
-    private TextView txtClaimPlate;
-    private TextView txtClaimIssuingDate;
-    private TextView txtClaimStatus;
-    private TextView txtClaimDescription;
     private ProgressBar pbClaimDetails;
     private Claim claim;
-
+    private OnFragmentInteractionListener mListener;
 
     public ClaimDetailsFragment() {
         // Required empty public constructor
@@ -60,13 +52,18 @@ public class ClaimDetailsFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Populate the UI with Claim data
+     *
+     * @param claim Claim object
+     */
     public void bindData(Claim claim) {
-        txtClaimTitle = this.getView().findViewById(R.id.txtClaimTitle);
-        txtClaimId = this.getView().findViewById(R.id.txtClaimId);
-        txtClaimPlate = this.getView().findViewById(R.id.txtClaimPlate);
-        txtClaimIssuingDate = this.getView().findViewById(R.id.txtClaimIssuingDate);
-        txtClaimStatus = this.getView().findViewById(R.id.txtClaimStatus);
-        txtClaimDescription = this.getView().findViewById(R.id.txtClaimDescription);
+        TextView txtClaimTitle = this.getView().findViewById(R.id.txtClaimTitle);
+        TextView txtClaimId = this.getView().findViewById(R.id.txtClaimId);
+        TextView txtClaimPlate = this.getView().findViewById(R.id.txtClaimPlate);
+        TextView txtClaimIssuingDate = this.getView().findViewById(R.id.txtClaimIssuingDate);
+        TextView txtClaimStatus = this.getView().findViewById(R.id.txtClaimStatus);
+        TextView txtClaimDescription = this.getView().findViewById(R.id.txtClaimDescription);
 
         txtClaimTitle.setText(claim.getTitle());
         txtClaimId.setText(Integer.toString(this.claim.getId()));
@@ -86,7 +83,7 @@ public class ClaimDetailsFragment extends Fragment {
                 txtClaimStatus.setTextColor(getResources().getColor(R.color.pending));
                 break;
         }
-        this.txtClaimDescription.setText(claim.getDescription());
+        txtClaimDescription.setText(claim.getDescription());
     }
 
     @SuppressLint("SetTextI18n")
@@ -108,6 +105,28 @@ public class ClaimDetailsFragment extends Fragment {
             }
         };
         new ClaimTask(fetchClaimDetailsCallback, sessionId, claimId).execute();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof ClaimsHistoryFragment.OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+            mListener.onFragmentInteraction("Claim Details");
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(String title);
     }
 
 }

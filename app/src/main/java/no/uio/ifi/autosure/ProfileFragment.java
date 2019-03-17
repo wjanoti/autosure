@@ -68,6 +68,12 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(String title);
     }

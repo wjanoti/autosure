@@ -35,7 +35,7 @@ public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.View
                         ClaimDetailsFragment.newInstance(
                                 sessionId,
                                 Integer.parseInt(txtClaimItemId.getText().toString())
-                        )
+                        ), true
                     );
                 }
             });

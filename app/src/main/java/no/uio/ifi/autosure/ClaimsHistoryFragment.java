@@ -65,6 +65,13 @@ public class ClaimsHistoryFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        pbClaimsHistory.setVisibility(View.INVISIBLE);
+        mListener.onFragmentInteraction("Claims History");
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }

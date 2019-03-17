@@ -1,17 +1,16 @@
 package no.uio.ifi.autosure;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,7 +22,7 @@ import no.uio.ifi.autosure.tasks.LogoutTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener, ClaimDetailsFragment.OnFragmentInteractionListener {
 
     private static SessionManager sessionManager;
     private Customer customer;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         navUserName = navigationView.getHeaderView(0).findViewById(R.id.nav_user_name);
 
         // load default fragment
-        loadFragment(ClaimsHistoryFragment.newInstance(sessionManager.getSessionId()));
+        loadFragment(ClaimsHistoryFragment.newInstance(sessionManager.getSessionId()), false);
         navigationView.getMenu().getItem(1).setChecked(true);
 
         fetchCustomerInfo(sessionManager.getSessionId());
@@ -83,11 +82,11 @@ public class MainActivity extends AppCompatActivity
                     Fragment profileFragment = ProfileFragment.newInstance();
                     bundle.putSerializable("customer", this.customer);
                     profileFragment.setArguments(bundle);
-                    loadFragment(profileFragment);
+                    loadFragment(profileFragment, false);
                     break;
                 case R.id.nav_history:
                     Fragment claimHistoryFragment = ClaimsHistoryFragment.newInstance(sessionManager.getSessionId());
-                    loadFragment(claimHistoryFragment);
+                    loadFragment(claimHistoryFragment, true);
                     break;
                 case R.id.nav_new_claim:
                     break;
@@ -124,10 +123,15 @@ public class MainActivity extends AppCompatActivity
         new CustomerInfoTask(fetchCustomerInfoCallback, sessionId).execute();
     }
 
-    public void loadFragment(Fragment fragment) {
+    public void loadFragment(Fragment fragment, boolean addToBackStack) {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.clContent, fragment).commit();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.clContent, fragment);
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        }
+        fragmentTransaction.commit();
     }
 
     private void logout() {
