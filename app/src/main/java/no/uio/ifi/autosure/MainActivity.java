@@ -2,10 +2,10 @@ package no.uio.ifi.autosure;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Fragment profileFragment = ProfileFragment.newInstance();
                     bundle.putSerializable("customer", this.customer);
                     profileFragment.setArguments(bundle);
-                    loadFragment(profileFragment, false);
+                    loadFragment(profileFragment, true);
                     break;
                 case R.id.nav_history:
                     Fragment claimHistoryFragment = ClaimsHistoryFragment.newInstance(sessionManager.getSessionId());
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void loadFragment(Fragment fragment, boolean addToBackStack) {
         // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.clContent, fragment);
         if (addToBackStack) {
