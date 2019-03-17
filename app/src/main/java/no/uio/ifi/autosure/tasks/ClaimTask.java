@@ -25,7 +25,7 @@ public class ClaimTask extends AsyncTask<Void, Void, Claim> {
 
     @Override
     protected Claim doInBackground(Void... params) {
-        try{
+        try {
             claim = WSHelper.getClaimInfo(sessionId, claimId);
         } catch (Exception e) {
             Log.d(TAG, e.toString());
@@ -37,7 +37,7 @@ public class ClaimTask extends AsyncTask<Void, Void, Claim> {
     @Override
     protected void onPostExecute(Claim claim) {
         super.onPostExecute(claim);
-        if(this.taskListener != null) {
+        if (this.taskListener != null) {
             this.taskListener.onFinished(claim);
         }
     }

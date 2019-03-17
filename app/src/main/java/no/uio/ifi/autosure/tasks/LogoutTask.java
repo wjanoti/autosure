@@ -19,7 +19,7 @@ public class LogoutTask extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... params) {
-        try{
+        try {
             logoutSuccessful = WSHelper.logout(sessionId);
         } catch (Exception e) {
             Log.d(TAG, e.toString());
@@ -31,7 +31,7 @@ public class LogoutTask extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean logoutSuccessful) {
         super.onPostExecute(logoutSuccessful);
-        if(this.taskListener != null) {
+        if (this.taskListener != null) {
             this.taskListener.onFinished(logoutSuccessful);
         }
     }

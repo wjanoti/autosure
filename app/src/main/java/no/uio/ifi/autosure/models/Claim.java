@@ -14,7 +14,7 @@ public class Claim extends ClaimItem implements Serializable {
     private final List<ClaimMessage> claimMessageList;
 
     public Claim(int claimId, String claimTitle, String submissionDate, String occurrenceDate, String plate,
-                       String description, String status, List<ClaimMessage> msgList) {
+                 String description, String status, List<ClaimMessage> msgList) {
         super(claimId, claimTitle);
         this.submissionDate = submissionDate;
         ocurrenceDate = occurrenceDate;
@@ -72,7 +72,7 @@ public class Claim extends ClaimItem implements Serializable {
 
     public boolean removeClaimMessage(ClaimMessage claimMessage) {
         boolean res = false;
-        while(claimMessageList.contains(claimMessage)) {
+        while (claimMessageList.contains(claimMessage)) {
             res = claimMessageList.remove(claimMessage);
         }
         return res;
@@ -80,7 +80,7 @@ public class Claim extends ClaimItem implements Serializable {
 
     @Override
     public String toString() {
-        return  super.toString() + ", " +
+        return super.toString() + ", " +
                 "Submission Date: " + submissionDate + ", " +
                 "Number Plate: " + plate + ", " +
                 "Description: " + description + ", " +

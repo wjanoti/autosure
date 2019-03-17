@@ -2,7 +2,7 @@ package no.uio.ifi.autosure.models;
 
 import java.io.Serializable;
 
-public class ClaimMessage  implements Serializable {
+public class ClaimMessage implements Serializable {
 
     private final String sender;
     private final String message;
@@ -28,7 +28,7 @@ public class ClaimMessage  implements Serializable {
 
     @Override
     public String toString() {
-        return  "Sender: " + sender + ", " +
+        return "Sender: " + sender + ", " +
                 "Message: " + message + ", " +
                 "Date: " + date + ".";
     }

@@ -61,6 +61,7 @@ public class ClaimDetailsFragment extends Fragment {
      *
      * @param claim Claim object
      */
+    @SuppressLint("SetTextI18n")
     public void bindData(Claim claim) {
         TextView txtClaimTitle = this.getView().findViewById(R.id.txtClaimTitle);
         TextView txtClaimId = this.getView().findViewById(R.id.txtClaimId);
@@ -97,15 +98,12 @@ public class ClaimDetailsFragment extends Fragment {
     }
 
     private void fetchClaimDetails(int sessionId, int claimId) {
-
         TaskListener fetchClaimDetailsCallback = new TaskListener<Claim>() {
             @Override
             public void onFinished(Claim result) {
-                    claim = result;
+                claim = result;
                 pbClaimDetails.setVisibility(View.INVISIBLE);
-
                 bindData(claim);
-
             }
         };
         new ClaimTask(fetchClaimDetailsCallback, sessionId, claimId).execute();

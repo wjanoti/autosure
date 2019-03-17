@@ -33,12 +33,12 @@ public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.View
                 @Override
                 public void onClick(View v) {
                     // loads the claim details fragment
-                    int sessionId = ((MainActivity)v.getContext()).getSessionManager().getSessionId();
-                    ((MainActivity)v.getContext()).loadFragment(
-                        ClaimDetailsFragment.newInstance(
-                                sessionId,
-                                Integer.parseInt(txtClaimItemId.getText().toString())
-                        ), true
+                    int sessionId = ((MainActivity) v.getContext()).getSessionManager().getSessionId();
+                    ((MainActivity) v.getContext()).loadFragment(
+                            ClaimDetailsFragment.newInstance(
+                                    sessionId,
+                                    Integer.parseInt(txtClaimItemId.getText().toString())
+                            ), true
                     );
                 }
             });

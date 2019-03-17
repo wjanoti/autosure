@@ -20,7 +20,7 @@ public class CustomerInfoTask extends AsyncTask<Void, Void, Customer> {
 
     @Override
     protected Customer doInBackground(Void... params) {
-        try{
+        try {
             customer = WSHelper.getCustomerInfo(sessionId);
         } catch (Exception e) {
             Log.d(TAG, e.toString());
@@ -32,7 +32,7 @@ public class CustomerInfoTask extends AsyncTask<Void, Void, Customer> {
     @Override
     protected void onPostExecute(Customer customer) {
         super.onPostExecute(customer);
-        if(this.taskListener != null) {
+        if (this.taskListener != null) {
             this.taskListener.onFinished(customer);
         }
     }

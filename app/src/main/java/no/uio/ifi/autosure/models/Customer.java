@@ -45,6 +45,6 @@ public class Customer implements Serializable {
     }
 
     public String toString() {
-        return " [ Name : " + this.getName() + "| User name :" + this.getUsername() + "| Address: " + this.getAddress() + "| Date of birth: " + this.getDateOfBirth() + " |Fiscal Number : " + Integer.toString(this.getFiscalNumber()) +  " |Policy Number : " + Integer.toString(this.getPolicyNumber()) + "]";
+        return " [ Name : " + this.getName() + "| User name :" + this.getUsername() + "| Address: " + this.getAddress() + "| Date of birth: " + this.getDateOfBirth() + " |Fiscal Number : " + Integer.toString(this.getFiscalNumber()) + " |Policy Number : " + Integer.toString(this.getPolicyNumber()) + "]";
     }
 }

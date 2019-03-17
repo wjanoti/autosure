@@ -26,7 +26,7 @@ public class ClaimListTask extends AsyncTask<Void, Void, List<ClaimItem>> {
 
     @Override
     protected List<ClaimItem> doInBackground(Void... params) {
-        try{
+        try {
             claimItems = WSHelper.getCustomerClaims(sessionId);
         } catch (Exception e) {
             Log.d(TAG, e.toString());
@@ -38,7 +38,7 @@ public class ClaimListTask extends AsyncTask<Void, Void, List<ClaimItem>> {
     @Override
     protected void onPostExecute(List<ClaimItem> claimItems) {
         super.onPostExecute(claimItems);
-        if(this.taskListener != null) {
+        if (this.taskListener != null) {
             Collections.sort(claimItems);
             this.taskListener.onFinished(claimItems);
         }

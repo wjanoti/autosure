@@ -22,8 +22,8 @@ public class LoginTask extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... params) {
         int sessionId = 0;
 
-        try{
-            sessionId = WSHelper.login(username,password);
+        try {
+            sessionId = WSHelper.login(username, password);
         } catch (Exception e) {
             Log.d(TAG, e.toString());
         }
@@ -34,7 +34,7 @@ public class LoginTask extends AsyncTask<Void, Void, Integer> {
     @Override
     protected void onPostExecute(Integer sessionId) {
         super.onPostExecute(sessionId);
-        if(this.taskListener != null) {
+        if (this.taskListener != null) {
             this.taskListener.onFinished(sessionId);
         }
     }

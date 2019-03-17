@@ -49,10 +49,10 @@ public class ProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         TextView txtCustomerName = this.getActivity().findViewById(R.id.txtCustomerName);
-        TextView txtfiscalNumberTxt =  this.getActivity().findViewById(R.id.txtFiscalNumber);
-        TextView txtaddress =  this.getActivity().findViewById(R.id.txtAddress);
-        TextView txtdateOfBirth =  this.getActivity().findViewById(R.id.txtDateOfBirth);
-        TextView txtinsurancePolicyNumber =  this.getActivity().findViewById(R.id.txtInsurancePolicyNumber);
+        TextView txtfiscalNumberTxt = this.getActivity().findViewById(R.id.txtFiscalNumber);
+        TextView txtaddress = this.getActivity().findViewById(R.id.txtAddress);
+        TextView txtdateOfBirth = this.getActivity().findViewById(R.id.txtDateOfBirth);
+        TextView txtinsurancePolicyNumber = this.getActivity().findViewById(R.id.txtInsurancePolicyNumber);
 
         txtCustomerName.setText(customer.getName());
         txtaddress.setText(customer.getAddress());
