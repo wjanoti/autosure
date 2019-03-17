@@ -12,6 +12,9 @@ import java.util.List;
 
 import no.uio.ifi.autosure.models.ClaimItem;
 
+/**
+ * Class used by data to the recycler view items used in the Claims History fragment.
+ */
 public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.ViewHolder> {
 
     private List<ClaimItem> claimItemsList;

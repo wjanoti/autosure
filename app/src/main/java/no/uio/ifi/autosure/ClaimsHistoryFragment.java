@@ -1,9 +1,9 @@
 package no.uio.ifi.autosure;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +23,7 @@ public class ClaimsHistoryFragment extends Fragment {
     private List<ClaimItem> claimItems;
     private ProgressBar pbClaimsHistory;
     private ClaimItemAdapter claimItemAdapter;
-    private OnFragmentInteractionListener mListener;
+    private SwipeRefreshLayout swipeContainer;
 
     public ClaimsHistoryFragment() {
         // Required empty public constructor
@@ -35,8 +35,10 @@ public class ClaimsHistoryFragment extends Fragment {
     public static ClaimsHistoryFragment newInstance(int sessionId) {
         ClaimsHistoryFragment fragment = new ClaimsHistoryFragment();
         Bundle bundle = new Bundle();
+
         bundle.putInt("sessionId", sessionId);
         fragment.setArguments(bundle);
+
         return fragment;
     }
 
@@ -52,10 +54,19 @@ public class ClaimsHistoryFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_claims_history, container, false);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchCustomerClaimItems(getArguments().getInt("sessionId"));
+            }
+        });
+        swipeContainer.setColorSchemeResources(R.color.colorAccent);
+
         claimItemAdapter = new ClaimItemAdapter(claimItems);
 
         RecyclerView recyclerViewClaimHistory = view.findViewById(R.id.recViewClaimsHistory);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerViewClaimHistory.setLayoutManager(mLayoutManager);
         recyclerViewClaimHistory.setHasFixedSize(true);
         recyclerViewClaimHistory.setAdapter(claimItemAdapter);
@@ -68,37 +79,12 @@ public class ClaimsHistoryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         pbClaimsHistory.setVisibility(View.INVISIBLE);
-        mListener.onFragmentInteraction("Claims History");
+        ((MainActivity) getActivity()).setActionBarTitle("Claims History");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String title) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(title);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-            mListener.onFragmentInteraction("Claims History");
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     private void fetchCustomerClaimItems(int sessionId) {
@@ -110,16 +96,13 @@ public class ClaimsHistoryFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Error fetching claims", Toast.LENGTH_SHORT).show();
                 }
+                swipeContainer.setRefreshing(false);
                 pbClaimsHistory.setVisibility(View.INVISIBLE);
                 claimItemAdapter.setClaimItemsList(claimItems);
                 claimItemAdapter.notifyDataSetChanged();
             }
         };
         new ClaimListTask(fetchCustomerClaimsCallback, sessionId).execute();
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String title);
     }
 
 }

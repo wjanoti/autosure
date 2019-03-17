@@ -21,8 +21,7 @@ import no.uio.ifi.autosure.tasks.CustomerInfoTask;
 import no.uio.ifi.autosure.tasks.LogoutTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ClaimsHistoryFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener, ClaimDetailsFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static SessionManager sessionManager;
     private Customer customer;
@@ -107,8 +106,7 @@ public class MainActivity extends AppCompatActivity
         return sessionManager;
     }
 
-    @Override
-    public void onFragmentInteraction(String title) {
+    public void setActionBarTitle(String title) {
         setTitle(title);
     }
 

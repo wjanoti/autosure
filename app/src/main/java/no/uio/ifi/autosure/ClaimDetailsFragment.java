@@ -20,7 +20,6 @@ public class ClaimDetailsFragment extends Fragment {
 
     private ProgressBar pbClaimDetails;
     private Claim claim;
-    private OnFragmentInteractionListener mListener;
 
     public ClaimDetailsFragment() {
         // Required empty public constructor
@@ -39,6 +38,12 @@ public class ClaimDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fetchClaimDetails(getArguments().getInt("sessionId"), getArguments().getInt("claimId"));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("Claim Details");
     }
 
     @SuppressLint("SetTextI18n")
@@ -105,28 +110,6 @@ public class ClaimDetailsFragment extends Fragment {
             }
         };
         new ClaimTask(fetchClaimDetailsCallback, sessionId, claimId).execute();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof ClaimsHistoryFragment.OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-            mListener.onFragmentInteraction("Claim Details");
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String title);
     }
 
 }
