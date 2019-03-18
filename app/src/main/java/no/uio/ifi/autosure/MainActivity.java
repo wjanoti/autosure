@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (addToBackStack) {
             fragmentTransaction.addToBackStack(null);
         }
+        fragmentManager.popBackStack();
         fragmentTransaction.commit();
     }
 
