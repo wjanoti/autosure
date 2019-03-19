@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,8 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Fragment claimHistoryFragment = ClaimsHistoryFragment.newInstance(sessionManager.getSessionId());
                     loadFragment(claimHistoryFragment, true);
                     break;
-                case R.id.nav_new_claim:
-                    break;
                 case R.id.nav_logout:
                     logout();
             }
@@ -150,4 +149,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new LogoutTask(logoutCallback, sessionManager.getSessionId()).execute();
     }
 
+    public void newClaim(View view) {
+        Intent intent = new Intent(MainActivity.this, NewClaimActivity.class);
+        intent.putExtra("sessionId", sessionManager.getSessionId());
+        startActivity(intent);
+    }
 }

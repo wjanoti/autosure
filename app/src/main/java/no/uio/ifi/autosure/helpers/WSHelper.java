@@ -132,4 +132,22 @@ public class WSHelper {
         }
         return null;
     }
+
+    public static List<String> listPlates(int sessionId) throws Exception {
+        final String METHOD_NAME = "listPlates";
+        String jsonResult = makeRequest(METHOD_NAME, Integer.toString(sessionId));
+        try {
+            JSONArray jsonArray = new JSONArray(jsonResult);
+            ArrayList<String> plateList = new ArrayList<>();
+            for(int i=0; i < jsonArray.length(); i++){
+                String plate = jsonArray.getString(i);
+                plateList.add(plate);
+            }
+            return plateList;
+        }  catch (JSONException e) {
+            e.printStackTrace();
+            Log.d(TAG, "listPlates - JSONResult:" + jsonResult);
+        }
+        return null;
+    }
 }

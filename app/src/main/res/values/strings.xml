@@ -10,7 +10,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="profile">Profile</string>
-    <string name="claim_history">Claim History</string>
+    <string name="claim_history">Claims History</string>
     <string name="new_claim">New Claim</string>
     <string name="logout">Logout</string>
     <string name="name">Name</string>
@@ -30,4 +30,6 @@
     <string name="claim_status">Status</string>
     <string name="claim_description">Description</string>
     <string name="claim_title">Title</string>
+    <string name="submit_claim">Submit Claim</string>
+    <string name="ocurrence_date">Ocurrence Date</string>
 </resources>

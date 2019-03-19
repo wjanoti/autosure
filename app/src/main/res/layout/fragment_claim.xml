@@ -1,178 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:id="@+id/txtClaimTitleLabel"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/claim_title"
-            android:textColor="#a2a1b8"
-            android:background="#0000"
-            android:padding="16dp"
-            android:gravity="left"
-            tools:ignore="RtlHardcoded" />
-        <TextView
-            android:id="@+id/txtClaimTitle"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColorHint="#1b193b"
-            android:textColor="#181737"
-            android:background="#0000"
-            android:padding="16dp"
-            android:gravity="right"
-            tools:ignore="RtlHardcoded" />
-    </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#dad8d8"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="363dp"
+        tools:layout_editor_absoluteY="256dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtClaimTitleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:gravity="left"
+                android:padding="16dp"
+                android:text="@string/claim_title"
+                android:textColor="#a2a1b8"
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/txtClaimTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:gravity="right"
+                android:padding="16dp"
+                android:textColor="#181737"
+                android:textColorHint="#1b193b"
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dad8d8" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/txtClaimIdLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#0000"
+                android:gravity="left"
+                android:padding="16dp"
                 android:text="@string/claim_id_label"
                 android:textColor="#a2a1b8"
-                android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left"
                 tools:ignore="RtlHardcoded" />
+
             <TextView
                 android:id="@+id/txtClaimId"
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColorHint="#1b193b"
-                android:textColor="#181737"
                 android:background="#0000"
-                android:padding="16dp"
                 android:gravity="right"
+                android:padding="16dp"
+                android:textColor="#181737"
+                android:textColorHint="#1b193b"
+                android:textSize="16sp"
                 tools:ignore="RtlHardcoded" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#dad8d8"/>
+            android:background="#dad8d8" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/txtClaimIssuingDateLabel"
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#0000"
+                android:gravity="left"
+                android:padding="16dp"
                 android:text="@string/claim_issuing_date"
                 android:textColor="#a2a1b8"
-                android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left"
+                android:textSize="16sp"
                 tools:ignore="RtlHardcoded" />
+
             <TextView
                 android:id="@+id/txtClaimIssuingDate"
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColorHint="#1b193b"
-                android:textColor="#181737"
                 android:background="#0000"
-                android:padding="16dp"
                 android:gravity="right"
+                android:padding="16dp"
+                android:textColor="#181737"
+                android:textColorHint="#1b193b"
+                android:textSize="16sp"
                 tools:ignore="RtlHardcoded" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#dad8d8"/>
+            android:background="#dad8d8" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/txtClaimPlateLabel"
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#0000"
+                android:gravity="left"
+                android:padding="16dp"
                 android:text="@string/claim_plate"
                 android:textColor="#a2a1b8"
-                android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left"
+                android:textSize="16sp"
                 tools:ignore="RtlHardcoded" />
+
             <TextView
                 android:id="@+id/txtClaimPlate"
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColorHint="#1b193b"
-                android:textColor="#181737"
                 android:background="#0000"
-                android:padding="16dp"
                 android:gravity="right"
+                android:padding="16dp"
+                android:textColor="#181737"
+                android:textColorHint="#1b193b"
+                android:textSize="16sp"
                 tools:ignore="RtlHardcoded" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#dad8d8" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:id="@+id/txtClaimStatusLabel"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/claim_status"
-            android:textColor="#a2a1b8"
-            android:background="#0000"
-            android:padding="16dp"
-            android:gravity="left"
-            tools:ignore="RtlHardcoded" />
-        <TextView
-            android:id="@+id/txtClaimStatus"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColorHint="#1b193b"
-            android:textColor="#181737"
-            android:background="#0000"
-            android:padding="16dp"
-            android:gravity="right"
-            tools:ignore="RtlHardcoded" />
-    </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#dad8d8" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtClaimStatusLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:gravity="left"
+                android:padding="16dp"
+                android:text="@string/claim_status"
+                android:textColor="#a2a1b8"
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/txtClaimStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:gravity="right"
+                android:padding="16dp"
+                android:textColor="#181737"
+                android:textColorHint="#1b193b"
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dad8d8" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtClaimDescriptionLabel"
@@ -204,5 +222,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+
     </LinearLayout>
-</RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fltActBtnClaimMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.987"
+        app:srcCompat="@drawable/ic_chat" />
+</android.support.constraint.ConstraintLayout>
