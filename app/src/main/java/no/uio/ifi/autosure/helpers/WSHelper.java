@@ -30,9 +30,7 @@ public class WSHelper {
      *
      * @param method method name
      * @param args   argument list
-     *
      * @return response body
-     *
      * @throws Exception
      */
     private static String makeRequest(String method, String... args) throws Exception {
@@ -57,27 +55,54 @@ public class WSHelper {
         return resultsRequestSOAP.toString();
     }
 
+    /**
+     * Logs an user in the app
+     *
+     * @param username name of the user to log in
+     * @param password password of the user to log in
+     * @return int session id
+     * @throws Exception
+     * @see no.uio.ifi.autosure.tasks.LoginTask
+     */
     public static int login(String username, String password) throws Exception {
-        final String METHOD_NAME = "login";
-
-        return Integer.parseInt(makeRequest(METHOD_NAME, username, password));
+        return Integer.parseInt(makeRequest(Endpoints.LOGIN.getMethodName(), username, password));
     }
 
+    /**
+     * Logs an user out of the app
+     *
+     * @param sessionId session id of the logged in user
+     * @return boolean indicating if the operation was successful or not
+     * @throws Exception
+     * @see no.uio.ifi.autosure.tasks.LogoutTask
+     */
     public static boolean logout(int sessionId) throws Exception {
-        final String METHOD_NAME = "logout";
-
-        String response = makeRequest(METHOD_NAME, Integer.toString(sessionId));
+        String response = makeRequest(Endpoints.LOGOUT.getMethodName(), Integer.toString(sessionId));
 
         return response.equals("true");
     }
 
+    /**
+     * Fetches info about a single user
+     *
+     * @param sessionId session id of the user we want to fetch info from
+     * @return Customer object containing customer info
+     * @throws Exception
+     * @see no.uio.ifi.autosure.tasks.CustomerInfoTask
+     */
     public static Customer getCustomerInfo(int sessionId) throws Exception {
-        final String METHOD_NAME = "getCustomerInfo";
-        String jsonResult = makeRequest(METHOD_NAME, Integer.toString(sessionId));
+        String jsonResult = makeRequest(
+            Endpoints.CUSTOMER_INFO.getMethodName(),
+            Integer.toString(sessionId)
+        );
+
         try {
             JSONObject jsonRootObject = new JSONObject(jsonResult);
             String customerName = jsonRootObject.getString("name");
-            if (customerName == null || customerName.equals("")) return null;
+            if (customerName == null || customerName.equals("")) {
+                return null;
+            }
+
             String userName = jsonRootObject.getString("username");
             String address = jsonRootObject.optString("address");
             String dateOfBirth = jsonRootObject.getString("dateOfBirth");
@@ -89,12 +114,23 @@ public class WSHelper {
             e.printStackTrace();
             Log.d(TAG, "getCustomerInfo - JSONResult:" + jsonResult);
         }
+
         return null;
     }
 
+    /**
+     * List claims associated to a given user
+     *
+     * @param sessionId session id of the user
+     * @return List of claims
+     * @throws Exception
+     */
     public static List<ClaimItem> getCustomerClaims(int sessionId) throws Exception {
-        final String METHOD_NAME = "listClaims";
-        String jsonResult = makeRequest(METHOD_NAME, Integer.toString(sessionId));
+        String jsonResult = makeRequest(
+            Endpoints.CLAIM_LIST.getMethodName(),
+            Integer.toString(sessionId)
+        );
+
         try {
             JSONArray jsonArray = new JSONArray(jsonResult);
             ArrayList<ClaimItem> claimList = new ArrayList<>();
@@ -110,12 +146,25 @@ public class WSHelper {
             e.printStackTrace();
             Log.d(TAG, "listClaims - JSONResult:" + jsonResult);
         }
+
         return null;
     }
 
+    /**
+     * Get detailed info about a specific claim
+     *
+     * @param sessionId session id of the user who owns the claim
+     * @param claimId id of the claim
+     * @return Claim object containing claim data
+     * @throws Exception
+     */
     public static Claim getClaimInfo(int sessionId, int claimId) throws Exception {
-        final String METHOD_NAME = "getClaimInfo";
-        String jsonResult = makeRequest(METHOD_NAME, Integer.toString(sessionId), Integer.toString(claimId));
+        String jsonResult = makeRequest(
+                Endpoints.CLAIM_INFO.getMethodName(),
+                Integer.toString(sessionId),
+                Integer.toString(claimId)
+        );
+
         try {
             JSONObject jsonRootObject = new JSONObject(jsonResult);
             int claimIdResp = Integer.parseInt(jsonRootObject.getString("claimId"));
@@ -125,29 +174,43 @@ public class WSHelper {
             String occurrenceDate = jsonRootObject.optString("occurrenceDate");
             String description = jsonRootObject.optString("description");
             String status = jsonRootObject.optString("status");
+
             return new Claim(claimIdResp, claimTitle, submissionDate, occurrenceDate, plate, description, status);
         } catch (JSONException e) {
             e.printStackTrace();
             Log.d(TAG, "getClaimInfo - JSONResult:" + jsonResult);
         }
+
         return null;
     }
 
+    /**
+     * Fetches list of plates associated to an user
+     *
+     * @param sessionId session id of the user
+     * @return list of plates
+     * @throws Exception
+     */
     public static List<String> listPlates(int sessionId) throws Exception {
-        final String METHOD_NAME = "listPlates";
-        String jsonResult = makeRequest(METHOD_NAME, Integer.toString(sessionId));
+        String jsonResult = makeRequest(
+                Endpoints.PLATE_LIST.getMethodName(),
+                Integer.toString(sessionId)
+        );
         try {
             JSONArray jsonArray = new JSONArray(jsonResult);
             ArrayList<String> plateList = new ArrayList<>();
-            for(int i=0; i < jsonArray.length(); i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 String plate = jsonArray.getString(i);
                 plateList.add(plate);
             }
+
             return plateList;
-        }  catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
             Log.d(TAG, "listPlates - JSONResult:" + jsonResult);
         }
+
         return null;
     }
+
 }
