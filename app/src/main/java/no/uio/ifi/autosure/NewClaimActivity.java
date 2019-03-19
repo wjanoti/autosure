@@ -61,28 +61,18 @@ public class NewClaimActivity extends AppCompatActivity {
         TaskListener fetchPlatesCallback = new TaskListener<List<String>>() {
             @Override
             public void onFinished(List<String> result) {
-                String[] resultArr = new String[result.size()];
+                String[] resultArr = new String[result.size() + 1];
+                result.add(0, "Choose a plate...");
                 resultArr = result.toArray(resultArr);
 
                 ArrayAdapter<String> plateAdapter = new ArrayAdapter<>(
-                        NewClaimActivity.this,
-                        R.layout.support_simple_spinner_dropdown_item,
-                        resultArr
+                    NewClaimActivity.this,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    resultArr
                 );
 
                 dropdownPlates.setSelection(0);
                 dropdownPlates.setAdapter(plateAdapter);
-                dropdownPlates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
             }
         };
         new PlatesTask(fetchPlatesCallback, sessionId).execute();
