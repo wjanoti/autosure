@@ -65,7 +65,7 @@ public class WSHelper {
      * @see no.uio.ifi.autosure.tasks.LoginTask
      */
     public static int login(String username, String password) throws Exception {
-        return Integer.parseInt(makeRequest(Endpoints.LOGIN.getMethodName(), username, password));
+        return Integer.parseInt(makeRequest(WSEndpoints.LOGIN.getMethodName(), username, password));
     }
 
     /**
@@ -77,7 +77,7 @@ public class WSHelper {
      * @see no.uio.ifi.autosure.tasks.LogoutTask
      */
     public static boolean logout(int sessionId) throws Exception {
-        String response = makeRequest(Endpoints.LOGOUT.getMethodName(), Integer.toString(sessionId));
+        String response = makeRequest(WSEndpoints.LOGOUT.getMethodName(), Integer.toString(sessionId));
 
         return response.equals("true");
     }
@@ -92,7 +92,7 @@ public class WSHelper {
      */
     public static Customer getCustomerInfo(int sessionId) throws Exception {
         String jsonResult = makeRequest(
-            Endpoints.CUSTOMER_INFO.getMethodName(),
+            WSEndpoints.CUSTOMER_INFO.getMethodName(),
             Integer.toString(sessionId)
         );
 
@@ -127,7 +127,7 @@ public class WSHelper {
      */
     public static List<ClaimItem> getCustomerClaims(int sessionId) throws Exception {
         String jsonResult = makeRequest(
-            Endpoints.CLAIM_LIST.getMethodName(),
+            WSEndpoints.CLAIM_LIST.getMethodName(),
             Integer.toString(sessionId)
         );
 
@@ -160,7 +160,7 @@ public class WSHelper {
      */
     public static Claim getClaimInfo(int sessionId, int claimId) throws Exception {
         String jsonResult = makeRequest(
-                Endpoints.CLAIM_INFO.getMethodName(),
+                WSEndpoints.CLAIM_INFO.getMethodName(),
                 Integer.toString(sessionId),
                 Integer.toString(claimId)
         );
@@ -193,7 +193,7 @@ public class WSHelper {
      */
     public static List<String> listPlates(int sessionId) throws Exception {
         String jsonResult = makeRequest(
-                Endpoints.PLATE_LIST.getMethodName(),
+                WSEndpoints.PLATE_LIST.getMethodName(),
                 Integer.toString(sessionId)
         );
         try {

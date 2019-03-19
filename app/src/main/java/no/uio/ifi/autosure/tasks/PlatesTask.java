@@ -7,6 +7,9 @@ import java.util.List;
 
 import no.uio.ifi.autosure.helpers.WSHelper;
 
+/**
+ * Fetches plates associated to an user
+ */
 public class PlatesTask extends AsyncTask<Void, Void, List<String>> {
 
     private final static String TAG = "PlatesTask";

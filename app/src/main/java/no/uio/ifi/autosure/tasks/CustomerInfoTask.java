@@ -6,6 +6,9 @@ import android.util.Log;
 import no.uio.ifi.autosure.helpers.WSHelper;
 import no.uio.ifi.autosure.models.Customer;
 
+/**
+ * Fetches info about a customer
+ */
 public class CustomerInfoTask extends AsyncTask<Void, Void, Customer> {
 
     private final static String TAG = "CustomerInfoTask";

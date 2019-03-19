@@ -5,6 +5,9 @@ import android.util.Log;
 
 import no.uio.ifi.autosure.helpers.WSHelper;
 
+/**
+ * Performs login
+ */
 public class LoginTask extends AsyncTask<Void, Void, Integer> {
 
     private final static String TAG = "LoginTask";

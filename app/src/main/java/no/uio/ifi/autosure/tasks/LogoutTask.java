@@ -5,6 +5,9 @@ import android.util.Log;
 
 import no.uio.ifi.autosure.helpers.WSHelper;
 
+/**
+ * Performs logout
+ */
 public class LogoutTask extends AsyncTask<Void, Void, Boolean> {
 
     private final static String TAG = "LoginTask";
