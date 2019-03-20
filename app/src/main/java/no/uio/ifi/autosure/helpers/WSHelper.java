@@ -175,7 +175,8 @@ public class WSHelper {
             String description = jsonRootObject.optString("description");
             String status = jsonRootObject.optString("status");
 
-            return new Claim(claimIdResp, claimTitle, submissionDate, occurrenceDate, plate, description, status);
+            return new Claim(claimIdResp, claimTitle, submissionDate, occurrenceDate, plate,
+                    description, status);
         } catch (JSONException e) {
             e.printStackTrace();
             Log.d(TAG, "getClaimInfo - JSONResult:" + jsonResult);
@@ -212,5 +213,25 @@ public class WSHelper {
 
         return null;
     }
+
+    /**
+     * Submits a new claim from the user
+     *
+     * @param sessionId session id of the user
+     * @param claimTitle title of the claim
+     * @param occurrenceDate date of the occurrence
+     * @param plate plate associated with the claim
+     * @param claimDescription description
+     * @return boolean indicating success or failure
+     * @throws Exception
+     */
+    public static boolean submitNewClaim(int sessionId, String claimTitle, String occurrenceDate,
+                                         String plate, String claimDescription) throws Exception {
+        String res = makeRequest(WSEndpoints.NEW_CLAIM.getMethodName(), Integer.toString(sessionId),
+                claimTitle, occurrenceDate, plate, claimDescription);
+
+        return res.equals("true");
+    }
+
 
 }
