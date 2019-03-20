@@ -16,6 +16,7 @@ import java.util.List;
 
 import no.uio.ifi.autosure.models.Claim;
 import no.uio.ifi.autosure.models.ClaimItem;
+import no.uio.ifi.autosure.models.ClaimMessage;
 import no.uio.ifi.autosure.models.Customer;
 
 public class WSHelper {
@@ -233,5 +234,42 @@ public class WSHelper {
         return res.equals("true");
     }
 
+    /**
+     * List messages regarding a given claims
+     *
+     * @param sessionId session id of the user
+     * @param claimId id of the claim
+     * @return List of claim messages
+     * @throws Exception
+     */
+    public static List<ClaimMessage> getClaimMessages(int sessionId, int claimId) throws Exception {
+        String jsonResult = makeRequest(
+                WSEndpoints.CLAIM_MESSAGES.getMethodName(),
+                Integer.toString(sessionId),
+                Integer.toString(claimId)
+        );
+
+        try {
+            JSONArray jsonArray = new JSONArray(jsonResult);
+            ArrayList<ClaimMessage> claimList = new ArrayList<>();
+            for(int i=0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                claimList.add(
+                    new ClaimMessage(
+                        jsonObject.optString("sender"),
+                        jsonObject.optString("msg"),
+                        jsonObject.optString("date")
+                    )
+                );
+            }
+
+            return claimList;
+        }  catch (JSONException e) {
+            e.printStackTrace();
+            Log.d(TAG, "listClaimMessages - JSONResult:" + jsonResult);
+        }
+
+        return null;
+    }
 
 }
