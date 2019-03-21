@@ -32,4 +32,7 @@
     <string name="claim_title">Title</string>
     <string name="submit_claim">Submit Claim</string>
     <string name="ocurrence_date">Ocurrence Date</string>
+    <string name="you">You</string>
+    <string name="enter_message">Enter message</string>
+    <string name="send">SEND</string>
 </resources>

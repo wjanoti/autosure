@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     navigateToClaimsHistory();
                 } else {
                     Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    sessionManager.clearSession();
                 }
                 loginButton.setEnabled(true);
             }
@@ -76,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
      * Checks if there's an active session and navigates to claims history activity.
      */
     private void checkLogin() {
+
         if (sessionManager.isLoggedIn()) {
             navigateToClaimsHistory();
         }

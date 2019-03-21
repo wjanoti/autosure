@@ -154,4 +154,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra("sessionId", sessionManager.getSessionId());
         startActivity(intent);
     }
+
+    public void claimMessages(View view) {
+        Intent intent = new Intent(MainActivity.this, ClaimMessagesActivity.class);
+        startActivity(intent);
+    }
 }
