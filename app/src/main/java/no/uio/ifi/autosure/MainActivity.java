@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         if (!NetworkHelper.isOnline(this)) {
-            Log.d("BACON", "Device is offline");
             findViewById(R.id.fltActBtnAddClaim).setBackgroundTintList(
                     ColorStateList.valueOf(getResources().getColor(R.color.disabled))
             );
