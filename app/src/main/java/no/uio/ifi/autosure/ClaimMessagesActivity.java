@@ -1,6 +1,7 @@
 package no.uio.ifi.autosure;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ public class ClaimMessagesActivity extends AppCompatActivity {
     private int sessionId;
     private TextView txtClaimMessage;
     private RecyclerView mMessageRecycler;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,15 @@ public class ClaimMessagesActivity extends AppCompatActivity {
         sessionId = intent.getExtras().getInt("sessionId");
         claimId = intent.getExtras().getInt("claimId");
         fetchClaimMessages(sessionId, claimId);
+
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchClaimMessages(sessionId, claimId);
+            }
+        });
+        swipeContainer.setColorSchemeResources(R.color.colorAccent);
 
         txtClaimMessage = findViewById(R.id.txtClaimMessage);
         mMessageRecycler = findViewById(R.id.reyclerview_message_list);
@@ -53,6 +64,7 @@ public class ClaimMessagesActivity extends AppCompatActivity {
                     mMessageAdapter.notifyDataSetChanged();
                     mMessageRecycler.smoothScrollToPosition(mMessageRecycler.getAdapter().getItemCount() + 1);
                 }
+                swipeContainer.setRefreshing(false);
             }
         };
         new ListClaimMessagesTask(fetchClaimMessagesCallback, sessionId, claimId).execute();

@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         sessionManager.clearSession();
                     }
+                    progressBarLogin.setVisibility(View.INVISIBLE);
                 }
             };
             new CustomerInfoTask(fetchCustomerInfoCallback, sessionManager.getSessionId()).execute();
