@@ -272,4 +272,23 @@ public class WSHelper {
         return null;
     }
 
+    /**
+     * Sends a message regarding a claim
+     * @param sessionId session id of the user
+     * @param claimId id of the claim
+     * @param message message content
+     * @return bool
+     * @throws Exception
+     */
+    public static boolean sendClaimMessage(int sessionId, int claimId, String message) throws Exception {
+        String jsonResult = makeRequest(
+                WSEndpoints.NEW_MESSAGE.getMethodName(),
+                Integer.toString(sessionId),
+                Integer.toString(claimId),
+                message
+        );
+
+        return jsonResult.equals("true");
+    }
+
 }
