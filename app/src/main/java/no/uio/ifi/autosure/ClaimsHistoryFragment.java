@@ -1,11 +1,14 @@
 package no.uio.ifi.autosure;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import no.uio.ifi.autosure.helpers.NetworkHelper;
 import no.uio.ifi.autosure.models.ClaimItem;
 import no.uio.ifi.autosure.tasks.ClaimListTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
@@ -82,9 +86,16 @@ public class ClaimsHistoryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        FloatingActionButton fltActBtnAddClaim = getActivity().findViewById(R.id.fltActBtnAddClaim);
         fetchCustomerClaimItems(getArguments().getInt("sessionId"));
         pbClaimsHistory.setVisibility(View.INVISIBLE);
         ((MainActivity) getActivity()).setActionBarTitle("Claims History");
+        if (!NetworkHelper.isOnline(getActivity())) {
+            fltActBtnAddClaim.setBackgroundTintList(
+                    ColorStateList.valueOf(getResources().getColor(R.color.disabled))
+            );
+            fltActBtnAddClaim.setEnabled(false);
+        }
     }
 
     @Override

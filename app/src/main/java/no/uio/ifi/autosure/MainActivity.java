@@ -62,17 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (!NetworkHelper.isOnline(this)) {
-            findViewById(R.id.fltActBtnAddClaim).setBackgroundTintList(
-                    ColorStateList.valueOf(getResources().getColor(R.color.disabled))
-            );
-            findViewById(R.id.fltActBtnAddClaim).setEnabled(false);
-        }
-    }
-
-    @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
