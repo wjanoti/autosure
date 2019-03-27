@@ -38,8 +38,9 @@ public class NewClaimActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_claim);
-        Intent intent = this.getIntent();
         setTitle("New Claim");
+
+        Intent intent = this.getIntent();
         sessionId = intent.getExtras().getInt("sessionId");
         inputClaimTitle = findViewById(R.id.inputClaimTitle);
         inputClaimDescription = findViewById(R.id.inputClaimDescription);

@@ -1,6 +1,7 @@
 package no.uio.ifi.autosure;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -155,8 +156,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    public void claimMessages(View view) {
-        Intent intent = new Intent(MainActivity.this, ClaimMessagesActivity.class);
-        startActivity(intent);
-    }
 }

@@ -1,9 +1,13 @@
 package no.uio.ifi.autosure;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,7 @@ public class ClaimDetailsFragment extends Fragment {
 
     private ProgressBar pbClaimDetails;
     private Claim claim;
+    private FloatingActionButton fltActBtnClaimMessages;
 
     public ClaimDetailsFragment() {
         // Required empty public constructor
@@ -52,6 +57,16 @@ public class ClaimDetailsFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_claim, container, false);
 
         pbClaimDetails = view.findViewById(R.id.pbClaimDetails);
+        fltActBtnClaimMessages = view.findViewById(R.id.fltActBtnClaimMessages);
+        fltActBtnClaimMessages.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ClaimMessagesActivity.class);
+                intent.putExtra("sessionId", getArguments().getInt("sessionId"));
+                intent.putExtra("claimId", getArguments().getInt("claimId"));
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }
