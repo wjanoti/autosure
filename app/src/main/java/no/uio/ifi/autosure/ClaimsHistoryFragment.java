@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ClaimsHistoryFragment extends Fragment {
     private ProgressBar pbClaimsHistory;
     private ClaimItemAdapter claimItemAdapter;
     private SwipeRefreshLayout swipeContainer;
+    private TextView txtNoClaimsMessage;
 
     public ClaimsHistoryFragment() {
         // Required empty public constructor
@@ -63,14 +65,16 @@ public class ClaimsHistoryFragment extends Fragment {
         });
         swipeContainer.setColorSchemeResources(R.color.colorAccent);
 
+        pbClaimsHistory = view.findViewById(R.id.pbClaimsHistory);
+
+        txtNoClaimsMessage = view.findViewById(R.id.txtNoClaimsMessage);
         claimItemAdapter = new ClaimItemAdapter(claimItems);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
         RecyclerView recyclerViewClaimHistory = view.findViewById(R.id.recViewClaimsHistory);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerViewClaimHistory.setLayoutManager(mLayoutManager);
         recyclerViewClaimHistory.setHasFixedSize(true);
         recyclerViewClaimHistory.setAdapter(claimItemAdapter);
-        pbClaimsHistory = view.findViewById(R.id.pbClaimsHistory);
 
         return view;
     }
@@ -99,6 +103,9 @@ public class ClaimsHistoryFragment extends Fragment {
                 swipeContainer.setRefreshing(false);
                 pbClaimsHistory.setVisibility(View.INVISIBLE);
                 claimItemAdapter.setClaimItemsList(claimItems);
+                txtNoClaimsMessage.setVisibility(
+                    claimItemAdapter.getItemCount() > 0 ? View.INVISIBLE : View.VISIBLE
+                );
                 claimItemAdapter.notifyDataSetChanged();
             }
         };
