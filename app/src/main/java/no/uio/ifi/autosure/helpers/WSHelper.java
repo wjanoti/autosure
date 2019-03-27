@@ -167,16 +167,14 @@ public class WSHelper {
 
         try {
             JSONObject jsonRootObject = new JSONObject(jsonResult);
-            int claimIdResp = Integer.parseInt(jsonRootObject.getString("claimId"));
+            int respClaimId = Integer.parseInt(jsonRootObject.getString("claimId"));
             String claimTitle = jsonRootObject.getString("claimTitle");
             String plate = jsonRootObject.optString("plate");
             String submissionDate = jsonRootObject.optString("submissionDate");
-            String occurrenceDate = jsonRootObject.optString("occurrenceDate");
             String description = jsonRootObject.optString("description");
             String status = jsonRootObject.optString("status");
 
-            return new Claim(claimIdResp, claimTitle, submissionDate, occurrenceDate, plate,
-                    description, status);
+            return new Claim(respClaimId, claimTitle, submissionDate, plate, description, status);
         } catch (JSONException e) {
             e.printStackTrace();
             Log.d(TAG, "getClaimInfo - JSONResult:" + jsonResult);

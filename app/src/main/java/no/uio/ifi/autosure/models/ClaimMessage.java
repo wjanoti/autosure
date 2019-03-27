@@ -26,10 +26,4 @@ public class ClaimMessage implements Serializable {
         return sender;
     }
 
-    @Override
-    public String toString() {
-        return "Sender: " + sender + ", " +
-                "Message: " + message + ", " +
-                "Date: " + date + ".";
-    }
 }

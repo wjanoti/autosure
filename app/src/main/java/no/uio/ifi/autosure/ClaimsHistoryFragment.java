@@ -98,16 +98,16 @@ public class ClaimsHistoryFragment extends Fragment {
             public void onFinished(List<ClaimItem> result) {
                 if (result != null) {
                     claimItems = result;
+                    swipeContainer.setRefreshing(false);
+                    pbClaimsHistory.setVisibility(View.INVISIBLE);
+                    claimItemAdapter.setClaimItemsList(claimItems);
+                    txtNoClaimsMessage.setVisibility(
+                            claimItemAdapter.getItemCount() > 0 ? View.INVISIBLE : View.VISIBLE
+                    );
+                    claimItemAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(getActivity(), "Could not fetch claims from server", Toast.LENGTH_SHORT).show();
                 }
-                swipeContainer.setRefreshing(false);
-                pbClaimsHistory.setVisibility(View.INVISIBLE);
-                claimItemAdapter.setClaimItemsList(claimItems);
-                txtNoClaimsMessage.setVisibility(
-                    claimItemAdapter.getItemCount() > 0 ? View.INVISIBLE : View.VISIBLE
-                );
-                claimItemAdapter.notifyDataSetChanged();
             }
         };
         new ClaimListTask(fetchCustomerClaimsCallback, sessionId).execute();

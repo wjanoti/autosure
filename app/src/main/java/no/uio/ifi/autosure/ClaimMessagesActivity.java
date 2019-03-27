@@ -1,13 +1,11 @@
 package no.uio.ifi.autosure;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,10 +47,12 @@ public class ClaimMessagesActivity extends AppCompatActivity {
         TaskListener fetchClaimMessagesCallback = new TaskListener<List<ClaimMessage>>() {
             @Override
             public void onFinished(List<ClaimMessage> result) {
-                messageList = result;
-                mMessageAdapter.setMessageList(messageList);
-                mMessageAdapter.notifyDataSetChanged();
-                mMessageRecycler.smoothScrollToPosition(mMessageRecycler.getAdapter().getItemCount() + 1);
+                if (result != null) {
+                    messageList = result;
+                    mMessageAdapter.setMessageList(messageList);
+                    mMessageAdapter.notifyDataSetChanged();
+                    mMessageRecycler.smoothScrollToPosition(mMessageRecycler.getAdapter().getItemCount() + 1);
+                }
             }
         };
         new ListClaimMessagesTask(fetchClaimMessagesCallback, sessionId, claimId).execute();

@@ -1,9 +1,7 @@
 package no.uio.ifi.autosure;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -23,7 +21,6 @@ public class ClaimDetailsFragment extends Fragment {
 
     private ProgressBar pbClaimDetails;
     private Claim claim;
-    private FloatingActionButton fltActBtnClaimMessages;
 
     public ClaimDetailsFragment() {
         // Required empty public constructor
@@ -54,10 +51,12 @@ public class ClaimDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         final View view = inflater.inflate(R.layout.fragment_claim, container, false);
 
         pbClaimDetails = view.findViewById(R.id.pbClaimDetails);
-        fltActBtnClaimMessages = view.findViewById(R.id.fltActBtnClaimMessages);
+
+        FloatingActionButton fltActBtnClaimMessages = view.findViewById(R.id.fltActBtnClaimMessages);
         fltActBtnClaimMessages.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ClaimMessagesActivity.class);
@@ -66,7 +65,6 @@ public class ClaimDetailsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
 
         return view;
     }
@@ -116,9 +114,11 @@ public class ClaimDetailsFragment extends Fragment {
         TaskListener fetchClaimDetailsCallback = new TaskListener<Claim>() {
             @Override
             public void onFinished(Claim result) {
-                claim = result;
-                pbClaimDetails.setVisibility(View.INVISIBLE);
-                bindData(claim);
+                if (result != null) {
+                    claim = result;
+                    pbClaimDetails.setVisibility(View.INVISIBLE);
+                    bindData(claim);
+                }
             }
         };
         new ClaimTask(fetchClaimDetailsCallback, sessionId, claimId).execute();

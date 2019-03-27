@@ -32,14 +32,14 @@ public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.View
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // loads the claim details fragment
-                    int sessionId = ((MainActivity) v.getContext()).getSessionManager().getSessionId();
-                    ((MainActivity) v.getContext()).loadFragment(
-                            ClaimDetailsFragment.newInstance(
-                                    sessionId,
-                                    Integer.parseInt(txtClaimItemId.getText().toString())
-                            ), true
-                    );
+                // loads the claim details fragment
+                int sessionId = ((MainActivity) v.getContext()).getSessionManager().getSessionId();
+                ((MainActivity) v.getContext()).loadFragment(
+                    ClaimDetailsFragment.newInstance(
+                        sessionId,
+                        Integer.parseInt(txtClaimItemId.getText().toString())
+                    ), true
+                );
                 }
             });
         }
@@ -52,8 +52,7 @@ public class ClaimItemAdapter extends RecyclerView.Adapter<ClaimItemAdapter.View
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public ClaimItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                          int viewType) {
+    public ClaimItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,int viewType) {
         View claimItemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.claim_item_view, parent, false);
 
