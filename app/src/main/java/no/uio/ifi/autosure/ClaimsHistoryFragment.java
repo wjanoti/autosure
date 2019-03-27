@@ -82,6 +82,7 @@ public class ClaimsHistoryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        fetchCustomerClaimItems(getArguments().getInt("sessionId"));
         pbClaimsHistory.setVisibility(View.INVISIBLE);
         ((MainActivity) getActivity()).setActionBarTitle("Claims History");
     }
@@ -98,7 +99,7 @@ public class ClaimsHistoryFragment extends Fragment {
                 if (result != null) {
                     claimItems = result;
                 } else {
-                    Toast.makeText(getActivity(), "Error fetching claims", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Could not fetch claims from server", Toast.LENGTH_SHORT).show();
                 }
                 swipeContainer.setRefreshing(false);
                 pbClaimsHistory.setVisibility(View.INVISIBLE);

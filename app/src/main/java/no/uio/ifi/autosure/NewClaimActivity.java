@@ -40,13 +40,15 @@ public class NewClaimActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_claim);
         setTitle("New Claim");
 
+        // fetch plates list
         Intent intent = this.getIntent();
         sessionId = intent.getExtras().getInt("sessionId");
+        fetchPlates(sessionId);
+
         inputClaimTitle = findViewById(R.id.inputClaimTitle);
         inputClaimDescription = findViewById(R.id.inputClaimDescription);
         inputOcurrenceDate = findViewById(R.id.inputOcurrenceDate);
         dropdownPlates = findViewById(R.id.dropdownPlates);
-        fetchPlates(sessionId);
     }
 
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -92,6 +94,7 @@ public class NewClaimActivity extends AppCompatActivity {
     }
 
     public void newClaim(View view) {
+        // validate fields
         String claimTitle = inputClaimTitle.getText().toString();
         String occurrenceDate = inputOcurrenceDate.getText().toString();
         String plate = dropdownPlates.getSelectedItem().toString();
@@ -103,13 +106,12 @@ public class NewClaimActivity extends AppCompatActivity {
             inputOcurrenceDate.setError("Occurrence date is required");
             return;
         } else if (plate.equals("Choose a plate...")) {
-            ((TextView)dropdownPlates.getSelectedView()).setError("Plate is required");
+            ((TextView) dropdownPlates.getSelectedView()).setError("Plate is required");
             return;
         } else if (claimDescription.isEmpty()) {
             inputClaimDescription.setError("Description is required");
             return;
         }
-
 
         TaskListener newClaimCallback = new TaskListener<Boolean>() {
             @Override
@@ -122,6 +124,7 @@ public class NewClaimActivity extends AppCompatActivity {
                 }
             }
         };
+
         new NewClaimTask(newClaimCallback, sessionId, claimTitle, occurrenceDate,
                 plate, claimDescription).execute();
     }
