@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import no.uio.ifi.autosure.models.Customer;
+import no.uio.ifi.autosure.tasks.CustomerInfoTask;
 import no.uio.ifi.autosure.tasks.LoginTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
 
@@ -78,7 +80,17 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void checkLogin() {
         if (sessionManager.isLoggedIn()) {
-            navigateToClaimsHistory();
+            TaskListener fetchCustomerInfoCallback = new TaskListener<Customer>() {
+                @Override
+                public void onFinished(Customer customerResult) {
+                    if (customerResult != null) {
+                        navigateToClaimsHistory();
+                    } else {
+                        sessionManager.clearSession();
+                    }
+                }
+            };
+            new CustomerInfoTask(fetchCustomerInfoCallback, sessionManager.getSessionId()).execute();
         }
     }
 
