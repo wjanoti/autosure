@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import no.uio.ifi.autosure.models.Claim;
@@ -116,9 +117,12 @@ public class ClaimDetailsFragment extends Fragment {
             public void onFinished(Claim result) {
                 if (result != null) {
                     claim = result;
-                    pbClaimDetails.setVisibility(View.INVISIBLE);
                     bindData(claim);
+                } else {
+                    Toast.makeText(getActivity(), "Could not fetch claim details from server",
+                            Toast.LENGTH_LONG).show();
                 }
+                pbClaimDetails.setVisibility(View.INVISIBLE);
             }
         };
         new ClaimTask(fetchClaimDetailsCallback, sessionId, claimId).execute();

@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void checkLogin() {
         if (sessionManager.isLoggedIn()) {
+            progressBarLogin.setVisibility(View.VISIBLE);
             TaskListener fetchCustomerInfoCallback = new TaskListener<Customer>() {
                 @Override
                 public void onFinished(Customer customerResult) {
