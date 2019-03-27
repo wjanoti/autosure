@@ -91,7 +91,7 @@ public class ClaimsHistoryFragment extends Fragment {
         TaskListener fetchCustomerClaimsCallback = new TaskListener<List<ClaimItem>>() {
             @Override
             public void onFinished(List<ClaimItem> result) {
-                if (result.size() > 0) {
+                if (result != null) {
                     claimItems = result;
                 } else {
                     Toast.makeText(getActivity(), "Error fetching claims", Toast.LENGTH_SHORT).show();

@@ -39,7 +39,9 @@ public class ClaimListTask extends AsyncTask<Void, Void, List<ClaimItem>> {
     protected void onPostExecute(List<ClaimItem> claimItems) {
         super.onPostExecute(claimItems);
         if (this.taskListener != null) {
-            Collections.sort(claimItems);
+            if (claimItems != null) {
+                Collections.sort(claimItems);
+            }
             this.taskListener.onFinished(claimItems);
         }
     }

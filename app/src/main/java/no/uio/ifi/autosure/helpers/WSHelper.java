@@ -104,13 +104,12 @@ public class WSHelper {
                 return null;
             }
 
-            String userName = jsonRootObject.getString("username");
             String address = jsonRootObject.optString("address");
             String dateOfBirth = jsonRootObject.getString("dateOfBirth");
             int fiscalNumber = Integer.parseInt(jsonRootObject.getString("fiscalNumber"));
             int policyNumber = Integer.parseInt(jsonRootObject.optString("policyNumber"));
 
-            return new Customer(userName, customerName, address, dateOfBirth, fiscalNumber, policyNumber);
+            return new Customer(customerName, address, dateOfBirth, fiscalNumber, policyNumber);
         } catch (JSONException e) {
             e.printStackTrace();
             Log.d(TAG, "getCustomerInfo - JSONResult:" + jsonResult);
@@ -274,6 +273,7 @@ public class WSHelper {
 
     /**
      * Sends a message regarding a claim
+     *
      * @param sessionId session id of the user
      * @param claimId id of the claim
      * @param message message content
