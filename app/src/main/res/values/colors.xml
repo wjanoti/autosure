@@ -6,4 +6,5 @@
     <color name="pending">#FFC107</color>
     <color name="denied">#FF0000</color>
     <color name="approved">#008000</color>
+    <color name="disabled">#A5B4A5</color>
 </resources>

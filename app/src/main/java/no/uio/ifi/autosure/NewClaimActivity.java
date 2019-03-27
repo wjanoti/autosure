@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -76,9 +77,15 @@ public class NewClaimActivity extends AppCompatActivity {
         TaskListener fetchPlatesCallback = new TaskListener<List<String>>() {
             @Override
             public void onFinished(List<String> result) {
-                String[] resultArr = new String[result.size() + 1];
-                result.add(0, "Choose a plate...");
-                resultArr = result.toArray(resultArr);
+                String[] resultArr;
+                if (result != null) {
+                    resultArr = new String[result.size() + 1];
+                    result.add(0, "Choose a plate...");
+                    resultArr = result.toArray(resultArr);
+                } else {
+                    resultArr = new String[1];
+                    resultArr[0] = "Choose a plate...";
+                }
 
                 ArrayAdapter<String> plateAdapter = new ArrayAdapter<>(
                     NewClaimActivity.this,
@@ -86,8 +93,8 @@ public class NewClaimActivity extends AppCompatActivity {
                     resultArr
                 );
 
-                dropdownPlates.setSelection(0);
                 dropdownPlates.setAdapter(plateAdapter);
+                dropdownPlates.setSelection(0);
             }
         };
         new PlatesTask(fetchPlatesCallback, sessionId).execute();
@@ -97,7 +104,10 @@ public class NewClaimActivity extends AppCompatActivity {
         // validate fields
         String claimTitle = inputClaimTitle.getText().toString();
         String occurrenceDate = inputOcurrenceDate.getText().toString();
-        String plate = dropdownPlates.getSelectedItem().toString();
+        String plate = null;
+        if (dropdownPlates.getSelectedItem() != null) {
+            plate = dropdownPlates.getSelectedItem().toString();
+        };
         String claimDescription = inputClaimDescription.getText().toString();
         if (claimTitle.isEmpty()) {
             inputClaimTitle.setError("Claim title is required");
@@ -105,7 +115,7 @@ public class NewClaimActivity extends AppCompatActivity {
         } else if (occurrenceDate.isEmpty()) {
             inputOcurrenceDate.setError("Occurrence date is required");
             return;
-        } else if (plate.equals("Choose a plate...")) {
+        } else if (plate == null || plate.equals("Choose a plate...")) {
             ((TextView) dropdownPlates.getSelectedView()).setError("Plate is required");
             return;
         } else if (claimDescription.isEmpty()) {

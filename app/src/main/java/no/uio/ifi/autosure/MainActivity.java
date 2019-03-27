@@ -1,6 +1,7 @@
 package no.uio.ifi.autosure;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,12 +13,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import no.uio.ifi.autosure.helpers.NetworkHelper;
 import no.uio.ifi.autosure.models.Customer;
 import no.uio.ifi.autosure.tasks.CustomerInfoTask;
 import no.uio.ifi.autosure.tasks.LogoutTask;
@@ -56,7 +59,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(1).setChecked(true);
 
         fetchCustomerInfo(sessionManager.getSessionId());
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!NetworkHelper.isOnline(this)) {
+            Log.d("BACON", "Device is offline");
+            findViewById(R.id.fltActBtnAddClaim).setBackgroundTintList(
+                    ColorStateList.valueOf(getResources().getColor(R.color.disabled))
+            );
+            findViewById(R.id.fltActBtnAddClaim).setEnabled(false);
+        }
     }
 
     @Override
@@ -114,8 +128,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TaskListener fetchCustomerInfoCallback = new TaskListener<Customer>() {
             @Override
             public void onFinished(Customer customerResult) {
-                customer = customerResult;
-                navUserName.setText(customerResult.getName());
+                if (customerResult != null) {
+                    customer = customerResult;
+                    navUserName.setText(customerResult.getName());
+                }
             }
         };
         new CustomerInfoTask(fetchCustomerInfoCallback, sessionId).execute();

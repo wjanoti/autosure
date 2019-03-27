@@ -54,11 +54,13 @@ public class ProfileFragment extends Fragment {
         TextView txtdateOfBirth = this.getActivity().findViewById(R.id.txtDateOfBirth);
         TextView txtinsurancePolicyNumber = this.getActivity().findViewById(R.id.txtInsurancePolicyNumber);
 
-        txtCustomerName.setText(customer.getName());
-        txtaddress.setText(customer.getAddress());
-        txtdateOfBirth.setText(customer.getDateOfBirth());
-        txtinsurancePolicyNumber.setText(Integer.toString(customer.getPolicyNumber()));
-        txtfiscalNumberTxt.setText(Integer.toString(customer.getFiscalNumber()));
+        if (customer != null) {
+            txtCustomerName.setText(customer.getName());
+            txtaddress.setText(customer.getAddress());
+            txtdateOfBirth.setText(customer.getDateOfBirth());
+            txtinsurancePolicyNumber.setText(Integer.toString(customer.getPolicyNumber()));
+            txtfiscalNumberTxt.setText(Integer.toString(customer.getFiscalNumber()));
+        }
     }
 
 }
