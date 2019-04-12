@@ -1,13 +1,10 @@
 package no.uio.ifi.autosure;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -16,12 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import no.uio.ifi.autosure.tasks.LogoutTask;
 import no.uio.ifi.autosure.tasks.NewClaimTask;
 import no.uio.ifi.autosure.tasks.PlatesTask;
 import no.uio.ifi.autosure.tasks.TaskListener;
@@ -38,12 +33,14 @@ public class NewClaimActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_new_claim);
         setTitle("New Claim");
 
         // fetch plates list
         Intent intent = this.getIntent();
         sessionId = intent.getExtras().getInt("sessionId");
+
         fetchPlates(sessionId);
 
         inputClaimTitle = findViewById(R.id.inputClaimTitle);
@@ -52,6 +49,7 @@ public class NewClaimActivity extends AppCompatActivity {
         dropdownPlates = findViewById(R.id.dropdownPlates);
     }
 
+    // set up calendar
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -67,6 +65,7 @@ public class NewClaimActivity extends AppCompatActivity {
         }
     };
 
+    // on click handler of the date field
     public void openDatePicker(View view) {
         new DatePickerDialog(this, date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),

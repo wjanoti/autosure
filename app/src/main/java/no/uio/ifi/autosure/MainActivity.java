@@ -1,7 +1,6 @@
 package no.uio.ifi.autosure;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -13,14 +12,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import no.uio.ifi.autosure.helpers.NetworkHelper;
+import no.uio.ifi.autosure.helpers.SessionManager;
 import no.uio.ifi.autosure.models.Customer;
 import no.uio.ifi.autosure.tasks.CustomerInfoTask;
 import no.uio.ifi.autosure.tasks.LogoutTask;

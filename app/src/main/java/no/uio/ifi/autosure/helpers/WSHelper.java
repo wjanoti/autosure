@@ -37,6 +37,8 @@ public class WSHelper {
     private static String makeRequest(String method, String... args) throws Exception {
         // create the request
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+        // add request params
         SoapObject request = new SoapObject(NAMESPACE, method);
         int paramCounter = 0;
         for (String arg : args) {

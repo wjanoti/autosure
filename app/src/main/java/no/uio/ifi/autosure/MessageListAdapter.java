@@ -18,8 +18,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
     private List<ClaimMessage> mMessageList;
 
-    MessageListAdapter(Context context, List<ClaimMessage> messageList) {
-        Context mContext = context;
+    MessageListAdapter(List<ClaimMessage> messageList) {
         mMessageList = messageList;
     }
 

@@ -1,4 +1,4 @@
-package no.uio.ifi.autosure;
+package no.uio.ifi.autosure.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,7 +8,7 @@ public class SessionManager {
 
     private SharedPreferences sharedPreferences;
 
-    SessionManager(Context context) {
+    public SessionManager(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 

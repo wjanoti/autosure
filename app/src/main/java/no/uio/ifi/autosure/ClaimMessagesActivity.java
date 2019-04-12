@@ -49,7 +49,7 @@ public class ClaimMessagesActivity extends AppCompatActivity {
 
         txtClaimMessage = findViewById(R.id.txtClaimMessage);
         mMessageRecycler = findViewById(R.id.reyclerview_message_list);
-        mMessageAdapter = new MessageListAdapter(this, messageList);
+        mMessageAdapter = new MessageListAdapter(messageList);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
         mMessageRecycler.setAdapter(mMessageAdapter);
     }

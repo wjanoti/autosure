@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import no.uio.ifi.autosure.helpers.SessionManager;
 import no.uio.ifi.autosure.models.Customer;
 import no.uio.ifi.autosure.tasks.CustomerInfoTask;
 import no.uio.ifi.autosure.tasks.LoginTask;
