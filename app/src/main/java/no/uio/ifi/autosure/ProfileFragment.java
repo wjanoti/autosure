@@ -31,10 +31,26 @@ public class ProfileFragment extends Fragment {
         customer = (Customer) bundle.getSerializable(CUSTOMER);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        TextView txtCustomerName = view.findViewById(R.id.txtCustomerName);
+        TextView txtfiscalNumberTxt = view.findViewById(R.id.txtFiscalNumber);
+        TextView txtaddress = view.findViewById(R.id.txtAddress);
+        TextView txtdateOfBirth = view.findViewById(R.id.txtDateOfBirth);
+        TextView txtinsurancePolicyNumber = view.findViewById(R.id.txtInsurancePolicyNumber);
+        if (customer != null) {
+            txtCustomerName.setText(customer.getName());
+            txtaddress.setText(customer.getAddress());
+            txtdateOfBirth.setText(customer.getDateOfBirth());
+            txtinsurancePolicyNumber.setText(Integer.toString(customer.getPolicyNumber()));
+            txtfiscalNumberTxt.setText(Integer.toString(customer.getFiscalNumber()));
+        }
+
+        return view;
     }
 
     @Override
@@ -47,20 +63,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        TextView txtCustomerName = this.getActivity().findViewById(R.id.txtCustomerName);
-        TextView txtfiscalNumberTxt = this.getActivity().findViewById(R.id.txtFiscalNumber);
-        TextView txtaddress = this.getActivity().findViewById(R.id.txtAddress);
-        TextView txtdateOfBirth = this.getActivity().findViewById(R.id.txtDateOfBirth);
-        TextView txtinsurancePolicyNumber = this.getActivity().findViewById(R.id.txtInsurancePolicyNumber);
-
-        if (customer != null) {
-            txtCustomerName.setText(customer.getName());
-            txtaddress.setText(customer.getAddress());
-            txtdateOfBirth.setText(customer.getDateOfBirth());
-            txtinsurancePolicyNumber.setText(Integer.toString(customer.getPolicyNumber()));
-            txtfiscalNumberTxt.setText(Integer.toString(customer.getFiscalNumber()));
-        }
     }
 
 }
